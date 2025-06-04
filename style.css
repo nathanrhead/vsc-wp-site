@@ -1,0 +1,66 @@
+/*
+ Theme Name:   Responsive Child
+ Template:     responsive
+ Description:  Child theme for Responsive
+ Author:       Nathan Cox
+ Version:      1.0.0
+*/
+
+.site-header div.site-branding {
+  padding: 0;
+}
+
+/* Add margin to the top of the site's header. */
+.site-footer { 
+  margin-top: 2rem
+}
+
+/* Add margin and padding to the site name in the footer. */
+.site-footer .footer-widget-wrapper h2.wp-block-heading, .site-footer ul {
+  margin: 0;
+  padding-bottom: 1rem;
+}
+
+.wp-block-social-link-anchor:hover svg path {
+  fill: #10659c;
+}
+
+/* Remove the border around the search feature's spy-glass icon. */
+.res-search-icon .responsive-header-search-icon-wrap {
+  border: none;
+}
+
+/* === Outer Wrapper (applies flex and layout) === */
+.search-type-responsive-slide .res-search-wrapper {
+  background: #ffffff;
+  border: 1px solid #d9d9d9;
+  border-radius: 9999px;
+  box-sizing: border-box;
+}
+
+/* === Icon Inside Button === */
+.search-type-responsive-slide .search-submit svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.about-page-form div.wpforms-container-full .wpforms-form button.wpforms-submit.resp-contact-form-button[type=submit] {
+  border-radius: 10px;
+  border: none;
+  width: 100%;
+}
+
+.about-page-form div.wpforms-container-full .wpforms-form input[type="text"],
+.about-page-form div.wpforms-container-full .wpforms-form input[type="email"],
+.about-page-form div.wpforms-container-full .wpforms-form input[type="tel"],
+.about-page-form div.wpforms-container-full .wpforms-form textarea {
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  width: 100%;
+}
+
+/* @media all and (width >= 768px) {
+  .about-page-form div.wpforms-container-full .wpforms-form {
+    width: 50%
+  }
+} */
