@@ -6,13 +6,20 @@
  Version:      1.0.0
 */
 
+/* Add margin to the sides in mobile. */
+.site.hfeed {
+  max-width: 90%;
+  margin: auto;
+}
+
+/* Remove padding from the header's logo. */
 .site-header div.site-branding {
   padding: 0;
 }
 
 /* Add margin to the top of the site's header. */
 .site-footer { 
-  margin-top: 2rem
+  margin-top: 2rem;
 }
 
 /* Add margin and padding to the site name in the footer. */
@@ -21,6 +28,7 @@
   padding-bottom: 1rem;
 }
 
+/* Add a hover color to the social-media icons. */
 .wp-block-social-link-anchor:hover svg path {
   fill: #10659c;
 }
@@ -44,12 +52,12 @@
   height: 1rem;
 }
 
+/* Style the inputs of the contact form on the About page. */
 .about-page-form div.wpforms-container-full .wpforms-form button.wpforms-submit.resp-contact-form-button[type=submit] {
   border-radius: 10px;
   border: none;
   width: 100%;
 }
-
 .about-page-form div.wpforms-container-full .wpforms-form input[type="text"],
 .about-page-form div.wpforms-container-full .wpforms-form input[type="email"],
 .about-page-form div.wpforms-container-full .wpforms-form input[type="tel"],
@@ -59,8 +67,14 @@
   width: 100%;
 }
 
-/* @media all and (width >= 768px) {
-  .about-page-form div.wpforms-container-full .wpforms-form {
-    width: 50%
+/* Reverse the order of the About page in mobile. */
+.about-container .elementor-container {
+  flex-direction: column-reverse;
+}
+
+@media all and (width >= 1024px) {
+  /* Set the order of the Aboutu page back to normal for desktop. */
+  .about-container .elementor-container {
+    flex-direction: row;
   }
-} */
+}
