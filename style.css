@@ -78,7 +78,6 @@
 }
 
 /* === Custom Post-Type: Book === */
-
 /* Set the Books custom post-type's width to full. */
 body.single-book.single #primary.content-area {
   width: 100%;
@@ -90,11 +89,39 @@ body.single-book.single #primary.content-area {
   background-color: #F7F7F7;
   border-radius: 12px;
 }
-
+/* Make the image column stretch full height. */
+article.book.type-book .wp-block-columns > .wp-block-column:first-child {
+  align-self: stretch;
+  display: flex;
+}
+/* Let the image wrapper grow with the column */
+.book-detail_featured-image {
+  flex-grow: 1;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: auto;
+  min-height: 100%;
+  /* align-items: stretch; */
+}
+.book-detail_featured-image figure {
+  flex: 1;
+  display: flex;
+  align-items: stretch;
+  height: 100%;
+  padding: 4rem;
+}
+/* Style the image inside the book-detail featured image container */
+.book-detail_featured-image img {
+  width: auto;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
 /* Remove margins from the hero image on the book-detail post. */
 .single-book .wp-block-image {
   margin: 0;
-  padding: 2rem;
 }
 
 /* Set the margins for the header, subheader, and description on book-detail post. */
@@ -136,9 +163,10 @@ body.single-book.single #primary.content-area {
   font-weight: bold;
 }
 
-/* Add padding to jpgs when featured on book-detail page. */
-.book-detail_featured-image.jpg {
-  padding: 2rem 0;
+.wp-block-button a,
+.wp-block-post-title a {
+  border: none;
+  transition: all 300ms ease;
 }
 
 /* Style the images rendered in the query loop. */
