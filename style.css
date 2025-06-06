@@ -163,10 +163,16 @@ article.book.type-book .wp-block-columns > .wp-block-column:first-child {
   font-weight: bold;
 }
 
+/* Add a smoother transition of a tags. */
 .wp-block-button a,
 .wp-block-post-title a {
   border: none;
   transition: all 300ms ease;
+}
+
+/* Alternate the order of a book's details on the books page. */
+.books-page_books-list > .wp-block-post-template > li:nth-child(even) .wp-block-group.is-layout-flex {
+  flex-direction: row-reverse;
 }
 
 /* Style the images rendered in the query loop. */
@@ -186,6 +192,24 @@ article.book.type-book .wp-block-columns > .wp-block-column:first-child {
   display: block;
   object-fit: contain !important;
   padding: 1rem;
+}
+
+/* Style the list of books on the books page. */
+.books-page_books-list p {
+  margin-bottom: 2rem;
+}
+.books-page_books-list ul li {
+  margin: 0;
+}
+.books-page_books-list ul li .wp-block-group {
+  padding: 0;
+}
+.books-page_books-list ul li .wp-block-group > .wp-block-group {
+  padding: 2rem;
+}
+
+.page.page-template-books #primary.content-area {
+  width: 100% !important;
 }
 
 @media all and (width >= 1024px) {
