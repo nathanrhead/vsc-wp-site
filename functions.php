@@ -73,7 +73,7 @@ function book_price_shortcode($atts) {
 }
 add_shortcode('book_price', 'book_price_shortcode');
 
-// Send the book post's ID to the shortcode to render accurate prices.
+// Send the book post's ID to the shortcode to render accurate prices in the query loop.
 add_filter('render_block', function ($block_content, $block) {
   if (
     $block['blockName'] === 'core/shortcode' &&
@@ -132,6 +132,34 @@ add_filter( 'query_loop_block_query_vars', function ( $query_args, $block_contex
   }
 
   return $query_args;
+}, 10, 2 );
+
+// Add the book-detail page's link to the image of the query loop.
+add_filter( 'render_block', function( $block_content, $block ) {
+  if ( $block['blockName'] === 'core/post-featured-image' && is_singular( 'book' ) === true ) {
+
+    // Get the current post ID being rendered.
+    $post_id = isset( $block['attrs']['postId'] ) ? $block['attrs']['postId'] : get_the_ID();
+
+    // Fallback if postId is not set.
+    if ( !$post_id ) {
+      global $post;
+      $post_id = $post ? $post->ID : null;
+    }
+
+    if ( $post_id ) {
+      $permalink = get_permalink( $post_id );
+
+      // Wrap the existing image content with a link.
+      $block_content = preg_replace(
+        '/(<figure.*?>)(.*?)(<\/figure>)/is',
+        '$1<a href="' . esc_url( $permalink ) . '">$2</a>$3',
+        $block_content
+      );
+    }
+  }
+
+  return $block_content;
 }, 10, 2 );
 
 // // View all actions.
