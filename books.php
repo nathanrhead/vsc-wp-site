@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-get_header();
+get_header( 'books' );
 Responsive\responsive_wrapper_top(); // Before wrapper content hook.
 
 if (

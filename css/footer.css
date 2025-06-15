@@ -1,0 +1,15 @@
+/* Add margin and padding to the site name in the footer. */
+.site-footer .footer-widget-wrapper h2.wp-block-heading, .site-footer ul {
+  margin: 0;
+  padding-bottom: 1rem;
+}
+
+/* Add a hover color to the social-media icons in the footer. */
+.wp-block-social-link-anchor:hover svg path {
+  fill: #10659c;
+}
+
+/* Remove li style from social links. */
+.wp-block-social-links li {
+  list-style: none;
+}

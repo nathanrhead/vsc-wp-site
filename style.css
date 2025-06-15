@@ -6,52 +6,6 @@
  Version:      1.0.0
 */
 
-/* Add margin to the sides in mobile. */
-.site.hfeed {
-  max-width: 90%;
-  margin: auto;
-}
-
-/* Remove padding from the header's logo. */
-.site-header div.site-branding {
-  padding: 0;
-}
-
-/* Add margin to the top of the site's header. */
-.site-footer { 
-  margin-top: 2rem;
-}
-
-/* Add margin and padding to the site name in the footer. */
-.site-footer .footer-widget-wrapper h2.wp-block-heading, .site-footer ul {
-  margin: 0;
-  padding-bottom: 1rem;
-}
-
-/* Add a hover color to the social-media icons. */
-.wp-block-social-link-anchor:hover svg path {
-  fill: #10659c;
-}
-
-/* Remove the border around the search feature's spy-glass icon. */
-.res-search-icon .responsive-header-search-icon-wrap {
-  border: none;
-}
-
-/* === Outer Wrapper (applies flex and layout) === */
-.search-type-responsive-slide .res-search-wrapper {
-  background: #ffffff;
-  border: 1px solid #d9d9d9;
-  border-radius: 9999px;
-  box-sizing: border-box;
-}
-
-/* === Icon Inside Button === */
-.search-type-responsive-slide .search-submit svg {
-  width: 1rem;
-  height: 1rem;
-}
-
 /* Style the inputs of the contact form on the About page. */
 .about-page-form div.wpforms-container-full .wpforms-form button.wpforms-submit.resp-contact-form-button[type=submit] {
   border-radius: 10px;
@@ -67,112 +21,11 @@
   width: 100%;
 }
 
-/* Reverse the order of the About page in mobile. */
-.about-container .elementor-container {
-  flex-direction: column-reverse;
-}
-
-/* Remove li style from social links. */
-.wp-block-social-links li {
-  list-style: none;
-}
-
-/* === Custom Post-Type: Book === */
-/* Set the Books custom post-type's width to full. */
-body.single-book.single #primary.content-area {
-  width: 100%;
-}
-
-/* Style the hero image of a book's detail post. */
-.book-detail_featured-image,
-.wp-block-query > ul li figure {
-  background-color: #F7F7F7;
-  border-radius: 12px;
-}
-/* Make the image column stretch full height. */
-article.book.type-book .wp-block-columns > .wp-block-column:first-child {
-  align-self: stretch;
-  display: flex;
-}
-/* Let the image wrapper grow with the column */
-.book-detail_featured-image {
-  flex-grow: 1;
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: auto;
-  min-height: 100%;
-  /* align-items: stretch; */
-}
-.book-detail_featured-image figure {
-  flex: 1;
-  display: flex;
-  align-items: stretch;
-  height: 100%;
-  padding: 4rem;
-}
-/* Style the image inside the book-detail featured image container */
-.book-detail_featured-image img {
-  width: auto;
-  height: 100%;
-  object-fit: contain;
-  display: block;
-}
-/* Remove margins from the hero image on the book-detail post. */
-.single-book .wp-block-image {
-  margin: 0;
-}
-
-/* Set the margins for the header, subheader, and description on book-detail post. */
-.single-book h2,
-.single-book h4,
-.single-book p {
-  margin: 0;
-}
-.single-book h4,
-.single-book p {
-  margin-bottom: 1rem;
-}
-
-/* Remove margin and padding from the query loop block. */
-.wp-block-query,
-.wp-block-query ul,
-.single-book .wp-block-query > ul > li,
-.single-book .wp-block-query > ul > li > div {
-  margin: 0;
-  padding: 0 !important;
-}
-
-/* Add spacing to the "Other Titles" subheading. */
-.single-book h2.book-detail-other-titles {
-  margin: 3rem 0 1rem 0;
-}
-
-.book-price-container {
-  display: flex;
-  margin-bottom: 1rem;
-}
-
-.book-price-container p {
-  margin: 0 1rem 0 0;
-}
-
-/* Style the book prices. */
-.book-price, .ebook-price {
-  font-weight: bold;
-}
-
 /* Add a smoother transition of a tags. */
 .wp-block-button a,
 .wp-block-post-title a {
   border: none;
   transition: all 300ms ease;
-}
-
-/* Alternate the order of a book's details on the books page. */
-.books-page_books-list > .wp-block-post-template > li:nth-child(even) .wp-block-group.is-layout-flex {
-  flex-direction: row-reverse;
 }
 
 /* Style the images rendered in the query loop. */
@@ -192,33 +45,4 @@ article.book.type-book .wp-block-columns > .wp-block-column:first-child {
   display: block;
   object-fit: contain !important;
   padding: 1rem;
-}
-
-/* Style the list of books on the books page. */
-.books-page_books-list p {
-  margin-bottom: 2rem;
-}
-.books-page_books-list ul li {
-  margin: 0;
-}
-.books-page_books-list ul li .wp-block-group {
-  padding: 0;
-}
-.books-page_books-list ul li .wp-block-group > .wp-block-group {
-  padding: 2rem;
-}
-
-.page.page-template-books #primary.content-area {
-  width: 100% !important;
-}
-
-@media all and (width >= 1024px) {
-  body.single-book.single #primary.content-area, body.single-book.single #primary.content-area article {
-    padding: 0;
-  }
-
-  /* Set the order of the Aboutu page back to normal for desktop. */
-  .about-container .elementor-container {
-    flex-direction: row;
-  }
 }

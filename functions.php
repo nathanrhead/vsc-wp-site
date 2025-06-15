@@ -1,9 +1,19 @@
 <?php
 // Enqueue parent and child styles
-add_action('wp_enqueue_scripts', function () {
+function responsive_child_enqueue_styles() {
+  // Enqueue parent theme stylesheet.
   wp_enqueue_style('parent-style', get_template_directory_uri() . '/style.css');
+
+  // Enqueue main child stylesheet.
   wp_enqueue_style('child-style', get_stylesheet_directory_uri() . '/style.css', ['parent-style'], filemtime(get_stylesheet_directory() . '/style.css'));
-});
+
+  // Enqueue modular child styles.
+  wp_enqueue_style('child-header-style', get_stylesheet_directory_uri() . '/css/header.css', ['child-style'], filemtime(get_stylesheet_directory() . '/css/header.css'));
+  wp_enqueue_style('child-footer-style', get_stylesheet_directory_uri() . '/css/footer.css', ['child-style'], filemtime(get_stylesheet_directory() . '/css/footer.css'));
+  wp_enqueue_style('child-books-style', get_stylesheet_directory_uri() . '/css/books.css', ['child-style'], filemtime(get_stylesheet_directory() . '/css/books.css'));
+  wp_enqueue_style('responsive-style', get_stylesheet_directory_uri() . '/css/responsive.css', ['child-style'], filemtime(get_stylesheet_directory() . '/css/responsive.css'));
+}
+add_action('wp_enqueue_scripts', 'responsive_child_enqueue_styles');
 
 // Enqueue custom JavaScript.
 function responsive_child_enqueue_scripts() {
@@ -46,6 +56,7 @@ function register_book_post_type() {
     'menu_position'      => 5,
     'menu_icon'          => 'dashicons-book-alt',
     'hierarchical'       => false,
+    'taxonomies'        => array('category', 'post_tag'), // Add categories and tags support
   );
 
   register_post_type('book', $args);
@@ -91,10 +102,7 @@ add_filter('render_block', function ($block_content, $block) {
 
 // Remove the "Read More" link from the excerpt block on custom post-type = book.
 add_filter( 'render_block', function ( $block_content, $block ) {
-  if (
-    get_post_type() === 'book' &&
-    $block['blockName'] === 'core/post-excerpt' &&
-    (strpos( $block_content, 'Read more' ) !== false || strpos( $block_content, 'Read More' ) !== false)
+  if ( get_post_type() === 'book' && $block['blockName'] === 'core/post-excerpt' && (strpos( $block_content, 'Read more' ) !== false || strpos( $block_content, 'Read More' ) !== false )
   ) {
     // Remove everything after ellipses (if present), preserving ellipses.
     $block_content = preg_replace(
@@ -116,7 +124,7 @@ add_filter( 'render_block', function ( $block_content, $block ) {
   return $block_content;
 }, 10, 2);
 
-// Exclude the featured book from Query Loop blocks.
+// Exclude the book featured on a book custom post-type from Query Loop blocks.
 add_filter( 'query_loop_block_query_vars', function ( $query_args, $block_context ) {
   if (
     ! empty( $query_args['post_type'] ) &&

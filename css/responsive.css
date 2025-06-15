@@ -1,0 +1,22 @@
+/* Add margin to the sides in mobile. */
+.site.hfeed {
+  max-width: 90%;
+  margin: auto;
+}
+
+/* Reverse the order of the About page in mobile. */
+.about-container .elementor-container {
+  flex-direction: column-reverse;
+}
+
+/* === Responsive Design Adjustments === */
+@media all and (width >= 1024px) {
+  body.single-book.single #primary.content-area, body.single-book.single #primary.content-area article {
+    padding: 0;
+  }
+
+  /* Set the order of the Aboutu page back to normal for desktop. */
+  .about-container .elementor-container {
+    flex-direction: row;
+  }
+}

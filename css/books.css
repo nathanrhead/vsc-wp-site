@@ -1,0 +1,191 @@
+/* Set the Books custom post-type's width to full. */
+body.single-book.single #primary.content-area {
+  width: 100%;
+}
+
+/* Style the hero image of a book's detail post. */
+.book-detail_featured-image,
+.wp-block-query > ul li figure {
+  background-color: #F7F7F7;
+  border-radius: 12px;
+}
+/* Make the image column stretch full height. */
+article.book.type-book .wp-block-columns > .wp-block-column:first-child {
+  align-self: stretch;
+  display: flex;
+}
+/* Let the image wrapper grow with the column */
+.book-detail_featured-image {
+  flex-grow: 1;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: auto;
+  min-height: 100%;
+  /* align-items: stretch; */
+}
+.book-detail_featured-image figure {
+  flex: 1;
+  display: flex;
+  align-items: stretch;
+  height: 100%;
+  padding: 4rem;
+}
+/* Style the image inside the book-detail featured image container */
+.book-detail_featured-image img {
+  width: auto;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+/* Remove margins from the hero image on the book-detail post. */
+.single-book .wp-block-image {
+  margin: 0;
+}
+
+/* Set the margins for the header, subheader, and description on book-detail post. */
+.single-book h2,
+.single-book h4,
+.single-book p {
+  margin: 0;
+}
+.single-book h4,
+.single-book p {
+  margin-bottom: 1rem;
+}
+
+/* Remove margin and padding from the query loop block. */
+.wp-block-query,
+.wp-block-query ul,
+.single-book .wp-block-query > ul > li,
+.single-book .wp-block-query > ul > li > div {
+  margin: 0;
+  padding: 0 !important;
+}
+
+/* Add spacing to the "Other Titles" subheading. */
+.single-book h2.book-detail-other-titles {
+  margin: 3rem 0 1rem 0;
+}
+
+.book-price-container {
+  display: flex;
+  margin-bottom: 1rem;
+}
+
+.book-price-container p {
+  margin: 0 1rem 0 0;
+}
+
+/* Style the book prices. */
+.book-price, .ebook-price {
+  font-weight: bold;
+}
+
+/* Alternate the order of a book's details on the books page. */
+.books-page_books-list > .wp-block-post-template > li:nth-child(even) .wp-block-group.is-layout-flex {
+  flex-direction: row-reverse;
+}
+
+/* Style the list of books on the books page. */
+.books-page_books-list p {
+  margin-bottom: 2rem;
+}
+.books-page_books-list ul li {
+  margin: 0;
+}
+.books-page_books-list ul li .wp-block-group {
+  padding: 0;
+}
+.books-page_books-list ul li .wp-block-group > .wp-block-group {
+  padding: 2rem;
+}
+
+/* For the books template, override Responsive's width restriction on main. */
+.page.page-template-books #primary.content-area {
+  width: 100% !important;
+}
+/* Expand the header from edge to edge. */
+.page-template-books.books-header-page .site.hfeed {
+  max-width: 100%;
+}
+#header-image-wrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+#header-image-wrapper #masthead {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+  background: transparent;
+  color: white;
+}
+.header-bg {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+/* Make the header's background color transparent. */
+body.page-template-books #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap {
+  background-color: transparent;
+}
+body.page-template-books #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-left .site-title a {
+  color: white;
+}
+/* Make the main navigation background color transparent. */
+body.page-template-books #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .main-navigation-wrapper {
+  background-color: transparent;
+}
+/* Make the main navigation links white and background transparent. */
+body.page-template-books #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .main-navigation-wrapper ul li a,
+body.page-template-books #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .main-navigation-wrapper ul li a svg {
+  color: white;
+  background: transparent;
+  stroke: white;
+}
+/* Make the submenu's background transparent. */
+body.page-template-books #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .main-navigation-wrapper ul ul {
+  background: transparent;
+}
+/* Make the search icon background transparent and the icon white. */
+body.page-template-books #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .responsive-header-search-icon-wrap {
+  background: transparent;
+  color: white;
+}
+
+/* Style the banner text on the books page. */
+.books-page__header-text-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+.books-page__header-text-container h1 {
+  font-size: 5rem;
+}
+.books-page__header-text-container h4 {
+  font-size: 2rem;
+}
+
+/* Style the nav's submenu links on the books page. */
+body .site.hfeed header#masthead .responsive-site-header-wrap .site-header-inner-wrap .site-header-upper-wrap .site-header-upper-inner-wrap .responsive-site-primary-header-wrap .site-primary-header-inner-wrap .site-header-primary-section-right .site-header-item .main-navigation .main-navigation-wrapper ul.nav-menu li.menu-item a {
+  transition: all 0.3s ease-in-out;
+}
+body .site.hfeed header#masthead .responsive-site-header-wrap .site-header-inner-wrap .site-header-upper-wrap .site-header-upper-inner-wrap .responsive-site-primary-header-wrap .site-primary-header-inner-wrap .site-header-primary-section-right .site-header-item .main-navigation .main-navigation-wrapper ul.nav-menu li.menu-item ul.sub-menu li.menu-item a {
+  size: 1rem;
+  transition: all 0.3s ease-in-out;
+}
+body .site.hfeed header#masthead .responsive-site-header-wrap .site-header-inner-wrap .site-header-upper-wrap .site-header-upper-inner-wrap .responsive-site-primary-header-wrap .site-primary-header-inner-wrap .site-header-primary-section-right .site-header-item .main-navigation .main-navigation-wrapper ul.nav-menu li.menu-item ul.sub-menu li.menu-item a:hover,
+body.page-template-books #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .responsive-header-search-link .res-search-icon .responsive-header-search-icon-wrap .responsive-header-search-icon svg:hover {
+  transition: all 0.3s ease-in-out;
+  transform: scale(1.1);
+}
+body.page-template-books #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .responsive-header-search-link .res-search-icon .responsive-header-search-icon-wrap .responsive-header-search-icon svg {
+  transition: all 0.3s ease-in-out;
+}
