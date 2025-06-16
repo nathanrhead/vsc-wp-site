@@ -106,6 +106,7 @@ article.book.type-book .wp-block-columns > .wp-block-column:first-child {
 .page.page-template-books #primary.content-area {
   width: 100% !important;
 }
+
 /* Expand the header from edge to edge. */
 .page-template-books.books-header-page .site.hfeed {
   max-width: 100%;
@@ -130,6 +131,7 @@ article.book.type-book .wp-block-columns > .wp-block-column:first-child {
   height: auto;
   object-fit: cover;
 }
+
 /* Make the header's background color transparent. */
 body.page-template-books #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap {
   background-color: transparent;
@@ -195,18 +197,43 @@ body.page-template-books #page #header-image-wrapper header#masthead .responsive
   margin-top: 3rem;
   margin-bottom: 3rem;
 }
-
+/* Style the featured books' heading.*/
 .books-page_featured-list h2 {
   font-size: 2.5rem;
+}
+/* Style the featured books' book titles.*/
+.books-page_featured-list h2.wp-block-post-title {
+  margin-bottom: 0;
 }
 
 body main .books-page_featured-list .wp-block-columns li {
   padding: 0;
 }
-
+.books-page_featured-list .wp-block-columns > .wp-block-column:nth-of-type(1) figure {
+  align-items: baseline;
+  background-color: transparent;;
+}
 /* Stretch the first column to fill the full container. */
 .books-page_featured-list .wp-block-columns > .wp-block-column:nth-of-type(1) figure.wp-block-post-featured-image {
   height: 100%;
+}
+/* Force the left-hand post to stretch to full height */
+.books-page_featured-list .wp-block-column:nth-of-type(1) .wp-block-query {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.books-page_featured-list .wp-block-column:nth-of-type(1) ul.wp-block-post-template {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.books-page_featured-list .wp-block-column:nth-of-type(1) ul.wp-block-post-template > li {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Make the image fill the figure. */
@@ -220,11 +247,18 @@ body main .books-page_featured-list .wp-block-columns li {
 
 /* Ensure the columns container stretches children */
 .books-page_featured-list .wp-block-columns {
+  display: flex;
   align-items: stretch;
 }
 
 /* Force the second column to stretch */
 .books-page_featured-list .wp-block-columns > .wp-block-column:nth-of-type(2) {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Ensure both columns fill the height */
+.books-page_featured-list .wp-block-column {
   display: flex;
   flex-direction: column;
 }
@@ -258,11 +292,3 @@ body main .books-page_other-list .books-page_books-list {
   border: 1px solid lightgray;
   border-radius: 10px;
 }
-
-/* Correct the padding of the lis. */
-/* body main .books-page_other-list .books-page_books-list ul li {
-  padding: 0rem;
-}
-body main .books-page_other-list .books-page_books-list ul.wp-block-post-template > li:nth-of-type(2) {
-  margin-top: 2rem;
-} */

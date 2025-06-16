@@ -11,7 +11,7 @@ function responsive_child_enqueue_styles() {
   wp_enqueue_style('child-header-style', get_stylesheet_directory_uri() . '/css/header.css', ['child-style'], filemtime(get_stylesheet_directory() . '/css/header.css'));
   wp_enqueue_style('child-footer-style', get_stylesheet_directory_uri() . '/css/footer.css', ['child-style'], filemtime(get_stylesheet_directory() . '/css/footer.css'));
   wp_enqueue_style('child-books-style', get_stylesheet_directory_uri() . '/css/books.css', ['child-style'], filemtime(get_stylesheet_directory() . '/css/books.css'));
-  wp_enqueue_style('responsive-style', get_stylesheet_directory_uri() . '/css/responsive.css', ['child-style'], filemtime(get_stylesheet_directory() . '/css/responsive.css'));
+  wp_enqueue_style('child-responsive-style', get_stylesheet_directory_uri() . '/css/responsive.css', ['child-style'], filemtime(get_stylesheet_directory() . '/css/responsive.css'));
 }
 add_action('wp_enqueue_scripts', 'responsive_child_enqueue_styles');
 
@@ -63,15 +63,15 @@ function register_book_post_type() {
 }
 add_action('init', 'register_book_post_type');
 
-// Add a shortcode for rendering the books' prices.
-function book_price_shortcode($atts) {
-  $atts = shortcode_atts([
+// Add a shortcode for rendering the books' prices and buy URLs.
+function book_price_shortcode( $atts ) {
+  $atts = shortcode_atts( [
     'post_id' => get_the_ID(),
-  ], $atts, 'book_price');
+  ], $atts, 'book_price' );
 
-  $post_id = intval($atts['post_id']);
+  $post_id = intval( $atts['post_id'] );
 
-  if ( ! $post_id ) {
+  if ( !$post_id ) {
     return '';
   }
 
@@ -83,6 +83,42 @@ function book_price_shortcode($atts) {
   return '<div class="book-price-container">' . $book_content . $ebook_content . '</div>';
 }
 add_shortcode('book_price', 'book_price_shortcode');
+
+// Handler for both [book_buy_url] and [ebook_buy_url] shortcodes.
+add_filter('render_block', function ($block_content, $block) {
+  if (strpos($block_content, '[book_buy_url]') !== false || strpos($block_content, '[ebook_buy_url]') !== false) {
+    $post_id = get_the_ID();
+
+    $book_url = esc_url(get_post_meta($post_id, 'book_buy_url', true));
+    $ebook_url = esc_url(get_post_meta($post_id, 'ebook_buy_url', true));
+
+    if ($book_url) {
+      $block_content = str_replace('href="http://[book_buy_url]"', 'href="' . $book_url . '"', $block_content);
+      $block_content = str_replace('href="[book_buy_url]"', 'href="' . $book_url . '"', $block_content);
+    } else {
+      // Remove the entire .wp-block-button div containing the [book_buy_url] anchor if no URL is present.
+      $block_content = preg_replace(
+        '/<div class="wp-block-button[^>]*>\s*<a[^>]+href="[^"]*\[book_buy_url\][^"]*"[^>]*>.*?<\/a>\s*<\/div>/is',
+        '',
+        $block_content
+      );
+    }
+
+    if ($ebook_url) {
+      $block_content = str_replace('href="http://[ebook_buy_url]"', 'href="' . $ebook_url . '"', $block_content);
+      $block_content = str_replace('href="[ebook_buy_url]"', 'href="' . $ebook_url . '"', $block_content);
+    } else {
+      // Remove the entire .wp-block-button div containing the [ebook_buy_url] anchor if no URL is present.
+      $block_content = preg_replace(
+        '/<div class="wp-block-button[^>]*>\s*<a[^>]+href="[^"]*\[ebook_buy_url\][^"]*"[^>]*>.*?<\/a>\s*<\/div>/is',
+        '',
+        $block_content
+      );
+    }
+  }
+
+  return $block_content;
+}, 12, 2);
 
 // Send the book post's ID to the shortcode to render accurate prices in the query loop.
 add_filter('render_block', function ($block_content, $block) {
@@ -144,8 +180,10 @@ add_filter( 'query_loop_block_query_vars', function ( $query_args, $block_contex
 
 // Add the book-detail page's link to the image of the query loop.
 add_filter( 'render_block', function( $block_content, $block ) {
-  if ( $block['blockName'] === 'core/post-featured-image' && is_singular( 'book' ) === true ) {
-
+  if ( 
+    $block['blockName'] === 'core/post-featured-image' 
+    // && is_singular( 'book' ) === true 
+  ) {
     // Get the current post ID being rendered.
     $post_id = isset( $block['attrs']['postId'] ) ? $block['attrs']['postId'] : get_the_ID();
 
