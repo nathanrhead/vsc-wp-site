@@ -189,3 +189,80 @@ body.page-template-books #page #header-image-wrapper header#masthead .responsive
 body.page-template-books #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .responsive-header-search-link .res-search-icon .responsive-header-search-icon-wrap .responsive-header-search-icon svg {
   transition: all 0.3s ease-in-out;
 }
+
+/* === Style the Books page's featured books section. === */
+.books-page_featured-list {
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+
+.books-page_featured-list h2 {
+  font-size: 2.5rem;
+}
+
+body main .books-page_featured-list .wp-block-columns li {
+  padding: 0;
+}
+
+/* Stretch the first column to fill the full container. */
+.books-page_featured-list .wp-block-columns > .wp-block-column:nth-of-type(1) figure.wp-block-post-featured-image {
+  height: 100%;
+}
+
+/* Make the image fill the figure. */
+.books-page_featured-list .wp-block-column:nth-of-type(1) figure.wp-block-post-featured-image img {
+  max-width: none;
+  width: 100%;
+  padding: 0;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+/* Ensure the columns container stretches children */
+.books-page_featured-list .wp-block-columns {
+  align-items: stretch;
+}
+
+/* Force the second column to stretch */
+.books-page_featured-list .wp-block-columns > .wp-block-column:nth-of-type(2) {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Stretch the query inside the second column */
+.books-page_featured-list .wp-block-column:nth-of-type(2) .wp-block-query {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Make the UL grow to full height */
+.books-page_featured-list .wp-block-column:nth-of-type(2) ul.wp-block-post-template {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Prevent LIs from collapsing */
+.books-page_featured-list .wp-block-column:nth-of-type(2) ul.wp-block-post-template > li {
+  flex-shrink: 0;
+}
+
+/* === Style the Books page's other-books section. === */
+.books-page_other-list h3 {
+  font-size: 2rem;
+}
+
+body main .books-page_other-list .books-page_books-list {
+  border: 1px solid lightgray;
+  border-radius: 10px;
+}
+
+/* Correct the padding of the lis. */
+/* body main .books-page_other-list .books-page_books-list ul li {
+  padding: 0rem;
+}
+body main .books-page_other-list .books-page_books-list ul.wp-block-post-template > li:nth-of-type(2) {
+  margin-top: 2rem;
+} */

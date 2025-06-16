@@ -11,6 +11,10 @@
 
 /* === Responsive Design Adjustments === */
 @media all and (width >= 1024px) {
+  body .site.hfeed main#primary {
+    padding: 0;
+  }
+
   body.single-book.single #primary.content-area, body.single-book.single #primary.content-area article {
     padding: 0;
   }
