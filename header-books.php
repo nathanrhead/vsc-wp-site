@@ -33,9 +33,17 @@ if ( ! function_exists( 'check_is_responsive_addons_greater' ) ) {
 	}
 }
 
-// Get nav and banner text colors from the Books page's custom fields.
+// Get nav and banner text and colors from the Books page's custom fields.
 $books_page = get_page_by_path( 'books' );
 if ( $books_page ) {
+  $banner_header_text = get_post_meta( $books_page->ID, 'banner-header-text', true );
+  $banner_subheader_text = get_post_meta( $books_page->ID, 'banner-subheader-text', true );
+  if ( ! $banner_header_text ) {
+    $banner_header_text = 'Books';
+  }
+  if ( ! $banner_subheader_text ) {
+    $banner_subheader_text = 'by V S Campbell';
+  }
   $banner_text_color = get_post_meta( $books_page->ID, 'banner-text-color',  true );
   $nav_text_color = get_post_meta( $books_page->ID, 'nav-text-color',  true );
 }
@@ -96,8 +104,8 @@ if ( $books_page ) {
             alt="<?php echo esc_attr( get_the_title() ); ?>"
           >
           <div class="books-page__header-text-container">
-            <h1 <?php echo $banner_text_color ? 'style="color:' . esc_attr( $banner_text_color ) . '"' : ''?>>Books</h1>
-            <h4 <?php echo$banner_text_color ? 'style="color:' . esc_attr( $banner_text_color ) . '"' : ''?>>by V S Campbell</h4>
+            <h1 <?php echo $banner_text_color ? 'style="color:' . esc_attr( $banner_text_color ) . '"' : ''?>><?php echo esc_html( $banner_header_text ); ?></h1>
+            <h4 <?php echo $banner_text_color ? 'style="color:' . esc_attr( $banner_text_color ) . '"' : ''?>><?php echo esc_html( $banner_subheader_text ); ?></h4>
           </div>
         </div>
     <?php endif; ?>

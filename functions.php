@@ -104,26 +104,6 @@ function register_video_post_type() {
 }
 add_action('init', 'register_video_post_type');
 
-// // Add a shortcode for rendering the books' prices and buy URLs.
-// function book_price_shortcode( $atts ) {
-//   global $post;
-
-//   // $post_id = intval( $atts['post_id'] );
-//   $post_id = isset( $atts['post_id'] ) ? intval( $atts['post_id'] ) : ( $post ? $post->ID : 0 );
-  
-//   if ( !$post_id ) {
-//     return '';
-//   }
-
-//   $price = get_post_meta( $post_id, 'book_price', true );
-//   $e_price = get_post_meta( $post_id, 'ebook_price', true );
-//   $book_content = $price ? '<p class="book-price">Paperback: ' . esc_html( $price ) . '</p>' : '';
-//   $ebook_content = $e_price ? '<p class="ebook-price">eBook: ' . esc_html( $e_price ) . '</p>' : '';
-
-//   return '<div class="book-price-container">' . $book_content . $ebook_content . '</div>';
-// }
-// add_shortcode('book_price', 'book_price_shortcode');
-
 // Handler for both [book_buy_url] and [ebook_buy_url] pseudo-shortcodes.
 add_filter('render_block', function ($block_content, $block) {
   if (strpos($block_content, '[book_buy_url]') !== false || strpos($block_content, '[ebook_buy_url]') !== false) {
@@ -159,26 +139,6 @@ add_filter('render_block', function ($block_content, $block) {
 
   return $block_content;
 }, 12, 2);
-
-// // Send the book post's ID to the shortcode to render accurate prices in the query loop.
-// add_filter('render_block', function ($block_content, $block) {
-//   if (
-//     $block['blockName'] === 'core/shortcode' &&
-//     isset($block['innerContent'][0]) &&
-//     strpos($block['innerContent'][0], '[book_price]') !== false
-//   ) {
-//     $post_id = get_the_ID();
-
-//     // Replace original shortcode with one that includes the post_id param
-//     $block_content = str_replace(
-//       '[book_price]',
-//       '[book_price post_id="' . esc_attr($post_id) . '"]',
-//       $block_content
-//     );
-//   }
-
-//   return $block_content;
-// }, 11, 2);
 
 // Remove the "Read More" link from the excerpt block on custom post-type = book.
 add_filter( 'render_block', function ( $block_content, $block ) {
@@ -271,6 +231,7 @@ function register_book_price_block_metadata() {
 }
 add_action('init', 'register_book_price_block_metadata');
 
+// Register the block's assets for the editor.
 function register_book_price_block_assets() {
   wp_register_script(
     'book-price-editor-script',
