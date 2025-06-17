@@ -1,0 +1,121 @@
+/* === Style the products' custom post-types. === */
+
+/* Set the product custom post-type's width to full. */
+body.single-book.single #primary.content-area,
+body.single-video.single #primary.content-area {
+  width: 100%;
+}
+
+/* Remove padding from the product detail posts. */
+body.single-book.single #primary.content-area,
+body.single-book.single #primary.content-area article,
+body.single-video.single #primary.content-area,
+body.single-video.single #primary.content-area article {
+  padding: 0;
+}
+
+/* === Style the hero image of a products's detail post. === */
+/* Remove the default padding from the hero image. */
+.book-detail_featured-image,
+.wp-block-query > ul li figure {
+  background-color: #F7F7F7;
+  border-radius: 12px;
+}
+/* Make the image column stretch full height. */
+article.book.type-book .wp-block-columns > .wp-block-column:first-child {
+  align-self: stretch;
+  display: flex;
+}
+/* Let the image wrapper grow with the column. */
+.book-detail_featured-image {
+  flex-grow: 1;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: auto;
+  min-height: 100%;
+}
+.book-detail_featured-image figure {
+  flex: 1;
+  display: flex;
+  align-items: stretch;
+  height: 100%;
+  padding: 4rem;
+}
+
+/* Style the image inside the product-detail featured image container */
+.book-detail_featured-image img {
+  width: auto;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* Remove margins from the hero image on the product-detail post. */
+.single-book .wp-block-image,
+.single-video .wp-block-image {
+  margin: 0;
+}
+
+/* Set the margins for the header, subheader, and description on product-detail post. */
+.single-book h2,
+.single-video h2,
+.single-book h4,
+.single-video h4,
+.single-book p,
+.single-video p {
+  margin: 0;
+}
+.single-book h4,
+.single-video h4,
+.single-book p,
+.single-video p {
+  margin-bottom: 1rem;
+}
+
+/* Remove margin and padding from the query-loop block. */
+.wp-block-query,
+.wp-block-query ul,
+.single-book .wp-block-query > ul > li,
+.single-video .wp-block-query > ul > li,
+.single-book .wp-block-query > ul > li > div,
+.single-video .wp-block-query > ul > li > div {
+  margin: 0;
+  padding: 0 !important;
+}
+
+/* Add spacing to the "Other Titles" subheading. */
+.single-book h2.book-detail-other-titles,
+.single-video h2.book-detail-other-titles {
+  margin: 3rem 0 1rem 0;
+}
+
+/* Style the product page's price container. */
+.book-price-container {
+  display: flex;
+  margin-bottom: 1rem;
+}
+.book-price-container p {
+  margin: 0 1rem 0 0;
+}
+.book-price, .ebook-price {
+  font-weight: bold;
+}
+
+.page_featured-list .wp-block-columns > .wp-block-column:nth-of-type(1) figure.wp-block-post-featured-image,
+body.single-video .wp-block-columns .wp-block-column:first-child figure.wp-block-post-featured-image {
+  height: 100%;
+  /* aspect-ratio: 2 / 3; */
+}
+
+/* .page_featured-list .wp-block-column:nth-of-type(1) figure.wp-block-post-featured-image img,
+body.single-video .wp-block-columns .wp-block-column:first-child figure.wp-block-post-featured-image img {
+  max-width: none;
+  width: 100%;
+  padding: 0;
+  border-radius: 10px;
+  object-fit: cover;
+  height: 100%;
+  display: block;
+} */

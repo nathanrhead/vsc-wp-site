@@ -1,0 +1,232 @@
+/* === Style the products' custom post-types. === */
+
+/* For the products template, override Responsive's width restriction on main. */
+.page.page-template-books #primary.content-area,
+.page.page-template-videos #primary.content-area {
+  width: 100% !important;
+}
+
+/* Expand the header from edge to edge. */
+.page-template-books.books-header-page .site.hfeed,
+.page-template-videos.videos-header-page .site.hfeed {
+  max-width: 100%;
+}
+#header-image-wrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+#header-image-wrapper #masthead {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+  background: transparent;
+  color: white;
+}
+.header-bg {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+/* Make the header's background color transparent. */
+body.page-template-books #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap,
+body.page-template-videos #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap {
+  background-color: transparent;
+}
+body.page-template-books #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-left .site-title a,
+body.page-template-videos #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-left .site-title a {
+  color: white;
+}
+
+/* Make the main navigation background color transparent. */
+body.page-template-books #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .main-navigation-wrapper,
+body.page-template-videos #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .main-navigation-wrapper {
+  background-color: transparent;
+}
+
+/* Make the main navigation links white and background transparent. */
+body.page-template-books #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .main-navigation-wrapper ul li a,
+body.page-template-books #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .main-navigation-wrapper ul li a svg,
+body.page-template-videos #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .main-navigation-wrapper ul li a,
+body.page-template-videos #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .main-navigation-wrapper ul li a svg {
+  color: white;
+  background: transparent;
+  stroke: white;
+}
+
+/* Make the submenu's background transparent. */
+body.page-template-books #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .main-navigation-wrapper ul ul,
+body.page-template-videos #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .main-navigation-wrapper ul ul {
+  background: transparent;
+}
+
+/* Make the search icon background transparent and the icon white. */
+body.page-template-books #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .responsive-header-search-icon-wrap,
+body.page-template-videos #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .responsive-header-search-icon-wrap {
+  background: transparent;
+  color: white;
+}
+
+/* Style the nav's submenu links on the product's main page. */
+body .site.hfeed header#masthead .responsive-site-header-wrap .site-header-inner-wrap .site-header-upper-wrap .site-header-upper-inner-wrap .responsive-site-primary-header-wrap .site-primary-header-inner-wrap .site-header-primary-section-right .site-header-item .main-navigation .main-navigation-wrapper ul.nav-menu li.menu-item a {
+  transition: all 0.3s ease-in-out;
+}
+body .site.hfeed header#masthead .responsive-site-header-wrap .site-header-inner-wrap .site-header-upper-wrap .site-header-upper-inner-wrap .responsive-site-primary-header-wrap .site-primary-header-inner-wrap .site-header-primary-section-right .site-header-item .main-navigation .main-navigation-wrapper ul.nav-menu li.menu-item ul.sub-menu li.menu-item a {
+  size: 1rem;
+  transition: all 0.3s ease-in-out;
+}
+body .site.hfeed header#masthead .responsive-site-header-wrap .site-header-inner-wrap .site-header-upper-wrap .site-header-upper-inner-wrap .responsive-site-primary-header-wrap .site-primary-header-inner-wrap .site-header-primary-section-right .site-header-item .main-navigation .main-navigation-wrapper ul.nav-menu li.menu-item ul.sub-menu li.menu-item a:hover,
+body.page-template-books #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .responsive-header-search-link .res-search-icon .responsive-header-search-icon-wrap .responsive-header-search-icon svg:hover,
+body.page-template-videos #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .responsive-header-search-link .res-search-icon .responsive-header-search-icon-wrap .responsive-header-search-icon svg:hover {
+  transition: all 0.3s ease-in-out;
+  transform: scale(1.1);
+}
+body.page-template-books #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .responsive-header-search-link .res-search-icon .responsive-header-search-icon-wrap .responsive-header-search-icon svg,
+body.page-template-videos #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .responsive-header-search-link .res-search-icon .responsive-header-search-icon-wrap .responsive-header-search-icon svg {
+  transition: all 0.3s ease-in-out;
+}
+
+/* Style the banner text on the product's main page. */
+.books-page__header-text-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+.books-page__header-text-container h1 {
+  font-size: 5rem;
+}
+.books-page__header-text-container h4 {
+  font-size: 2rem;
+}
+
+/* === Style the Books page's featured books section. === */
+.page_featured-list {
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+/* Style the featured books' heading.*/
+.page_featured-list h2 {
+  font-size: 2.5rem;
+}
+/* Style the featured and other-titles titles.*/
+.page_featured-list h2.wp-block-post-title,
+.page_featured-list h3.wp-block-post-title,
+.books-page__other-list h2.wp-block-post-title {
+  margin-bottom: 0;
+}
+
+/* REmove the padding from the featured products list. */
+body main .page_featured-list .wp-block-columns li {
+  padding: 0;
+}
+.page_featured-list .wp-block-columns > .wp-block-column:nth-of-type(1) figure {
+  padding: 2rem;
+  /* align-items: baseline;
+  background-color: transparent;; */
+}
+/* Stretch the first column to fill the full container. */
+.page_featured-list .wp-block-columns > .wp-block-column:nth-of-type(1) figure.wp-block-post-featured-image,
+body.single-video .wp-block-columns .wp-block-column:first-child figure.wp-block-post-featured-image {
+  height: 100%;
+}
+/* Force the left-hand post to stretch to full height */
+.page_featured-list .wp-block-column:nth-of-type(1) .wp-block-query {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.page_featured-list .wp-block-column:nth-of-type(1) ul.wp-block-post-template {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.page_featured-list .wp-block-column:nth-of-type(1) ul.wp-block-post-template > li {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Make the image fill the figure. */
+.page_featured-list .wp-block-column:nth-of-type(1) figure.wp-block-post-featured-image img,
+body.single-video .wp-block-columns .wp-block-column:first-child figure.wp-block-post-featured-image img {
+  max-width: none;
+  width: 100%;
+  padding: 0;
+  /* border-radius: 10px; */
+  object-fit: cover;
+}
+
+/* Force the second column to stretch. */
+/* .page_featured-list .wp-block-columns > .wp-block-column:nth-of-type(2) {
+  display: flex;
+  flex-direction: column;
+} */
+
+/* Ensure the right column fills the height. */
+.page_featured-list .wp-block-columns > .wp-block-column:nth-of-type(2) {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Stretch the query inside the second (right) column. */
+.page_featured-list .wp-block-column:nth-of-type(2) .wp-block-query {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Make the right column's UL grow to full height. */
+.page_featured-list .wp-block-column:nth-of-type(2) ul.wp-block-post-template {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Prevent LIs from collapsing. */
+.page_featured-list .wp-block-column:nth-of-type(2) ul.wp-block-post-template > li {
+  flex-shrink: 0;
+}
+
+/* === Style the Books page's other-books section. === */
+.books-page__other-list h3 {
+  font-size: 2rem;
+}
+
+/* Put a border around the other-titles list. */
+body main .books-page__other-list > div {
+  border: 1px solid lightgray;
+  border-radius: 10px;
+}
+
+/* Set the images's height to auto to center them in their containers in the product's main page's featured and other-titles lists. */
+.page_featured-list ul li figure.wp-block-post-featured-image a,
+.books-page__other-list ul li figure.wp-block-post-featured-image a {
+  height: auto;
+}
+
+/* Alternate the order of a product's details on the product's main page. */
+.books-page__other-list > .wp-block-query > .wp-block-post-template li:nth-child(even) .wp-block-group.is-layout-flex {
+  flex-direction: row-reverse;
+}
+
+/* Style the list of products on the product's main page. */
+.books-page__other-list p {
+  margin-bottom: 2rem;
+}
+.books-page__other-list ul li {
+  margin: 0;
+}
+.books-page__other-list ul li .wp-block-group {
+  padding: 0;
+}
+.books-page__other-list ul li .wp-block-group > .wp-block-group {
+  padding: 2rem;
+}

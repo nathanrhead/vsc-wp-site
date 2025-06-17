@@ -9,18 +9,27 @@
   flex-direction: column-reverse;
 }
 
-/* === Responsive Design Adjustments === */
+/* === Media queries === */
 @media all and (width >= 1024px) {
   body .site.hfeed main#primary {
     padding: 0;
   }
 
-  body.single-book.single #primary.content-area, body.single-book.single #primary.content-area article {
+  /* Remove padding from the content area of product custom post-types. */
+  body.single-book.single #primary.content-area,
+  body.single-book.single #primary.content-area article,
+  body.single-video.single #primary.content-area,
+  body.single-video.single #primary.content-area article {
     padding: 0;
   }
 
-  /* Set the order of the Aboutu page back to normal for desktop. */
+  /* Set the order of the About page back to normal for desktop. */
   .about-container .elementor-container {
     flex-direction: row;
+  }
+
+  .page_featured-list .wp-block-columns > .wp-block-column:nth-of-type(1) {
+    display: flex;
+    flex-direction: column;
   }
 }

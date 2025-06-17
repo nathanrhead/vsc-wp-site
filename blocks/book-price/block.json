@@ -1,0 +1,14 @@
+{
+  "apiVersion": 2,
+  "name": "responsive-child/book-price",
+  "title": "Book Price",
+  "category": "widgets",
+  "icon": "cart",
+  "description": "Displays book price dynamically.",
+  "editorScript": "book-price-editor-script",
+  "render": "file:./render.php",
+  "usesContext": ["postId"],
+  "supports": {
+    "html": false
+  }
+}
