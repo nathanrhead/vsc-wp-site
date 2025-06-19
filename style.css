@@ -36,7 +36,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 .wp-block-post-template .wp-block-post-featured-image img {
   max-width: 200px;
@@ -45,4 +45,15 @@
   display: block;
   object-fit: contain !important;
   padding: 1rem;
+}
+
+/* Remove position: relative from the featured image block: it causes the featured image to cover the mobile menu in Safari. */
+.wp-block-post-featured-image {
+  position: static !important;
+}
+
+#page .elementor section,
+#page .elementor div {
+  position: static;
+  overflow: visible;
 }
