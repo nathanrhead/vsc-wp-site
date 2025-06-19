@@ -1,3 +1,9 @@
+
+/* Add margin to the top of the site's header. */
+.site-footer { 
+  margin-top: 2rem;
+}
+
 /* Add margin and padding to the site name in the footer. */
 .site-footer .footer-widget-wrapper h2.wp-block-heading, .site-footer ul {
   margin: 0;
@@ -13,3 +19,4 @@
 .wp-block-social-links li {
   list-style: none;
 }
+
