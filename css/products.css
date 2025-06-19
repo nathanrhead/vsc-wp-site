@@ -11,26 +11,6 @@
 .page-template-videos.videos-header-page .site.hfeed {
   max-width: 100%;
 }
-#header-image-wrapper {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-}
-#header-image-wrapper #masthead {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 10;
-  background: transparent;
-  color: white;
-}
-.header-bg {
-  display: block;
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-}
 
 /* Make the header's background color transparent. */
 body.page-template-books #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap,
@@ -61,7 +41,7 @@ body.page-template-videos #page #header-image-wrapper header#masthead .responsiv
 /* Make the submenu's background transparent. */
 body.page-template-books #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .main-navigation-wrapper ul ul,
 body.page-template-videos #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .main-navigation-wrapper ul ul {
-  background: transparent;
+  background: rgba(0, 0, 0, 0.4);;
 }
 
 /* Make the search icon background transparent and the icon white. */
@@ -79,86 +59,64 @@ body .site.hfeed header#masthead .responsive-site-header-wrap .site-header-inner
   size: 1rem;
   transition: all 0.3s ease-in-out;
 }
-body .site.hfeed header#masthead .responsive-site-header-wrap .site-header-inner-wrap .site-header-upper-wrap .site-header-upper-inner-wrap .responsive-site-primary-header-wrap .site-primary-header-inner-wrap .site-header-primary-section-right .site-header-item .main-navigation .main-navigation-wrapper ul.nav-menu li.menu-item ul.sub-menu li.menu-item a:hover,
-body.page-template-books #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .responsive-header-search-link .res-search-icon .responsive-header-search-icon-wrap .responsive-header-search-icon svg:hover,
-body.page-template-videos #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .responsive-header-search-link .res-search-icon .responsive-header-search-icon-wrap .responsive-header-search-icon svg:hover {
-  transition: all 0.3s ease-in-out;
-  transform: scale(1.1);
-}
 body.page-template-books #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .responsive-header-search-link .res-search-icon .responsive-header-search-icon-wrap .responsive-header-search-icon svg,
 body.page-template-videos #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .responsive-header-search-link .res-search-icon .responsive-header-search-icon-wrap .responsive-header-search-icon svg {
   transition: all 0.3s ease-in-out;
 }
 
 /* Style the banner text on the product's main page. */
-.books-page__header-text-container {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-}
-.books-page__header-text-container h1 {
-  font-size: 5rem;
-}
-.books-page__header-text-container h4 {
-  font-size: 2rem;
+.products-page__header-text-container {
+  display: none;
 }
 
-/* === Style the Books page's featured books section. === */
-.page_featured-list {
-  margin-top: 3rem;
+/* === Style the product's main page's featured-products section. === */
+#page .page_featured-list {
+  margin-top: 0rem;
   margin-bottom: 3rem;
+  align-items: center;
 }
 /* Style the featured books' heading.*/
 .page_featured-list h2 {
-  font-size: 2.5rem;
+  font-size: 2rem;
+}
+.page_featured-list li > h2,
+.page_featured-list h3 {
+  font-size: 1.5rem;
+  margin-top: 0;
 }
 /* Style the featured and other-titles titles.*/
 .page_featured-list h2.wp-block-post-title,
 .page_featured-list h3.wp-block-post-title,
-.books-page__other-list h2.wp-block-post-title {
+.products-page__other-list h2.wp-block-post-title {
   margin-bottom: 0;
 }
 
-/* REmove the padding from the featured products list. */
-body main .page_featured-list .wp-block-columns li {
+/* Adjust the padding of the featured-products list. */
+#page .page_featured-list .wp-block-columns li {
   padding: 0;
+  padding-bottom: 2rem;
+  align-items: center;
 }
 .page_featured-list .wp-block-columns > .wp-block-column:nth-of-type(1) figure {
   padding: 2rem;
-  /* align-items: baseline;
-  background-color: transparent;; */
 }
 /* Stretch the first column to fill the full container. */
 .page_featured-list .wp-block-columns > .wp-block-column:nth-of-type(1) figure.wp-block-post-featured-image,
 body.single-video .wp-block-columns .wp-block-column:first-child figure.wp-block-post-featured-image {
   height: 100%;
 }
-/* Force the left-hand post to stretch to full height */
-.page_featured-list .wp-block-column:nth-of-type(1) .wp-block-query {
+/* Stretch to full height. */
+.page_featured-list .wp-block-column ul li {
   flex: 1;
   display: flex;
   flex-direction: column;
 }
-.page_featured-list .wp-block-column:nth-of-type(1) ul.wp-block-post-template {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-.page_featured-list .wp-block-column:nth-of-type(1) ul.wp-block-post-template > li {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-
 /* Make the image fill the figure. */
 .page_featured-list .wp-block-column:nth-of-type(1) figure.wp-block-post-featured-image img,
 body.single-video .wp-block-columns .wp-block-column:first-child figure.wp-block-post-featured-image img {
   max-width: none;
   width: 100%;
   padding: 0;
-  /* border-radius: 10px; */
   object-fit: cover;
 }
 
@@ -191,42 +149,138 @@ body.single-video .wp-block-columns .wp-block-column:first-child figure.wp-block
 }
 
 /* Prevent LIs from collapsing. */
-.page_featured-list .wp-block-column:nth-of-type(2) ul.wp-block-post-template > li {
+.page_featured-list .wp-block-column ul.wp-block-post-template > li {
   flex-shrink: 0;
 }
 
 /* === Style the Books page's other-books section. === */
-.books-page__other-list h3 {
+#page .products-page__other-list > h3 {
   font-size: 2rem;
 }
-
-/* Put a border around the other-titles list. */
-body main .books-page__other-list > div {
-  border: 1px solid lightgray;
-  border-radius: 10px;
+#page .products-page__other-list {
+  align-items: center;
 }
-
+/* Arrange the other list's items in a flex column. */
+.products-page__other-list ul li > div {
+  display: flex;
+  flex-direction: column;
+}
 /* Set the images's height to auto to center them in their containers in the product's main page's featured and other-titles lists. */
 .page_featured-list ul li figure.wp-block-post-featured-image a,
-.books-page__other-list ul li figure.wp-block-post-featured-image a {
+.products-page__other-list ul li figure.wp-block-post-featured-image a {
   height: auto;
 }
-
-/* Alternate the order of a product's details on the product's main page. */
-.books-page__other-list > .wp-block-query > .wp-block-post-template li:nth-child(even) .wp-block-group.is-layout-flex {
-  flex-direction: row-reverse;
-}
-
 /* Style the list of products on the product's main page. */
-.books-page__other-list p {
+.products-page__other-list p {
   margin-bottom: 2rem;
 }
-.books-page__other-list ul li {
+#page .products-page__other-list ul li {
   margin: 0;
+  padding: 1rem 0;
+  padding-bottom: 2rem;
 }
-.books-page__other-list ul li .wp-block-group {
+.products-page__other-list ul li .wp-block-group {
   padding: 0;
 }
-.books-page__other-list ul li .wp-block-group > .wp-block-group {
-  padding: 2rem;
+/* Center the other list's details. */
+.products-page__other-list ul li .wp-block-group .wp-block-group__inner-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+/* Stack the other list's buy buttons. */
+#page .products-page__other-list ul li .wp-block-buttons {
+  flex-direction: column;
+}
+
+/* Set the other list's buy buttons' width. */
+#page .products-page__other-list ul li .wp-block-buttons .wp-block-button {
+  width: 15rem;
+}
+
+/* === Media Queries === */
+@media all and (width >= 640px) {
+  /* Make the banner text visible. */
+  .products-page__header-text-container {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    margin-top: 1rem;
+  }
+}
+
+@media all and (width >= 768px) {
+  /* Increase the font size of the banner text. */
+  .products-page__header-text-container h1 {
+    font-size: 2.5rem;
+  }
+  .products-page__header-text-container h4 {
+    font-size: 1.2rem;
+  }
+
+  /* Add margin top to the featured products' heading and justify headings to the left on desktop. */
+  #page .page_featured-list {
+    margin-top: 3rem;
+    align-items: flex-start;
+  }
+  #page .products-page__other-list {
+    align-items: flex-start;
+  }
+}
+
+@media all and (width >= 1024px ) {
+  /* Increase the font size of the banner text on desktop. */
+  .products-page__header-text-container h1 {
+    font-size: 5rem;
+  }
+  .products-page__header-text-container h4 {
+    font-size: 2rem;
+  }  
+
+  /* Style the featured products' heading. */
+  #page .page_featured-list h2 {
+    font-size: 3rem;
+  }
+
+  /* Center the featured products' details. */
+  #page .page_featured-list .wp-block-columns li {
+    padding: 0;
+    align-items: flex-start;
+  }
+
+  #page .page_featured-list h3 {
+    font-size: 1.5rem;
+  }
+
+  /* Put a border around the other-titles list. */
+  #page .products-page__other-list > div {
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    align-self: stretch;
+  }
+
+  /* Put padding around the other-titles list inner div. */
+  #page .products-page__other-list > div > .wp-block-query-no-results {
+    padding: 2rem;
+  }
+
+  /* Alternate the order of a product's details on the product's main page. */
+  .products-page__other-list > .wp-block-query > .wp-block-post-template li:nth-child(even) .wp-block-group.is-layout-flex {
+    flex-direction: row-reverse;
+  }
+
+  /* Orient the other list's buy buttons in a row. */
+  #page .products-page__other-list ul li .wp-block-buttons {
+    flex-direction: row;
+  }
+
+  /* Add padding to the other list's details. */
+  .products-page__other-list ul li .wp-block-group > .wp-block-group {
+    padding: 2rem;
+  }
+  
 }

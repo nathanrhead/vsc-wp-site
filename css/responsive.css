@@ -33,3 +33,9 @@
     flex-direction: column;
   }
 }
+
+@media all and (width >= 768px) {
+  .site.hfeed {
+    max-width: 100%;
+  }  
+}
