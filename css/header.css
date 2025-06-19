@@ -1,12 +1,114 @@
+/* Restrict the height of the header image. */
+#header-image-wrapper {
+  max-height: 6rem;
+}
 
 /* Remove padding from the header's logo. */
 .site-header div.site-branding {
   padding: 0;
 }
 
-/* Add margin to the top of the site's header. */
-.site-footer { 
-  margin-top: 2rem;
+.site-header,
+#header-image-wrapper {
+  position: relative;
+  z-index: 0;
+}
+
+/* Ensure that the wrapper takes height of image; needed for overlay to cover image. */
+#header-image-wrapper {
+  display: table;
+}
+
+.header-image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3); /* this dims the banner's background image. */
+  /* z-index: 5; */
+}
+#header-image-wrapper {
+  position: relative;
+}
+
+/* Change the mobile menu from a push-style to a modal. */
+#header-menu {
+  position: fixed;
+  top: 8rem;
+  max-height: calc(100vh - 5rem); /* fallback */
+  left: 50%;
+  transform: translateX(-50%);
+  background: black;
+  width: 90%;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  /* display: block; */
+  display: flex;
+  flex-direction: column;
+  border-radius: 0.5rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  transition: opacity 0.3s ease;
+  opacity: 0;
+  visibility: hidden;
+  z-index: 99999;
+}
+@supports (height: 100dvh) {
+  #header-menu {
+    max-height: calc(100dvh - 5rem);
+  }
+}
+/* Show the mobile menu when clicked. */
+.main-navigation.toggled #header-menu {
+  opacity: 1;
+  visibility: visible;
+}
+/* Settings for the top-level sub-menu. */
+#header-menu > ul {
+  display: block;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+#header-menu li {
+  display: block;
+}
+#header-menu ul.sub-menu {
+  display: none;
+}
+#header-menu li.focus > ul.sub-menu {
+  display: block;
+  position: static;
+  z-index: 9999;
+}
+
+/* Fix the placement of the sub-menu caret. */
+#header-menu .res-iconify {
+  position: static;
+  min-width: 2rem;
+  min-height: 2rem;
+  /* margin: auto; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#header-menu li.menu-item-has-children > a {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#header-menu .res-iconify-outer {
+  display: none;
+}
+
+/* No hover effect on the mobile menu. */
+ul#header-menu li a:hover {
+  transform: none;
+}
+
+/* Enforce consistent indent across browsers. */
+#header-menu ul.sub-menu li {
+  padding-left: 1rem;
 }
 
 /* Remove the border around the search feature's spy-glass icon. */
@@ -26,4 +128,111 @@
 .search-type-responsive-slide .search-submit svg {
   width: 1rem;
   height: 1rem;
+}
+
+/* === Media Queries === */
+@media all and (width >= 480px) {
+  /* Set the font size of the logo. */
+  #masthead .site-title {
+    font-size: 2em;
+  }
+}
+
+@media all and (width >= 768px) {
+  /* Remove the restriction on the height of the header image. */
+  #header-image-wrapper {
+    max-height: none;
+  }
+
+  /* Add left padding to the submenu carets icon. */
+  #header-menu .res-iconify {
+    padding-left: .5rem;
+  }
+
+  /* Show the hamburger menu icon. */
+  #masthead .main-navigation .menu-toggle {
+    display: flex;
+    border: none;
+  }
+  
+  /* Hide submenus by default. */
+  #header-menu ul.sub-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: white;
+    z-index: 9999;
+    white-space: nowrap;
+    min-width: max-content;
+    width: auto;
+    border-radius: 10px;
+  }
+
+  /* Ensure list items are positioned relative for submenu stacking context. */
+  #header-menu li {
+    position: relative;
+  }
+
+  /* Show submenu on hover. */
+  #header-menu li:hover > ul.sub-menu {
+    display: block;
+  }
+
+  /* Ensure sub-submenus are positioned correctly. */
+  #header-menu ul.sub-menu li {
+    display: block;
+  }
+  #header-menu ul.sub-menu ul.sub-menu {
+    left: 100%;
+    top: 0;
+  }
+
+  /* Style the sub-menu links. */
+  #header-menu ul.sub-menu li a:hover {
+    background-color: transparent;
+  }
+}
+
+@media all and (width >= 1024px) {
+  /* Hide the hamburger menu icon. */
+  #masthead .main-navigation .menu-toggle {
+    display: none;
+  }
+  
+  /* Desktop menu container */
+  #header-menu {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: static;
+    top: 3.4rem;
+    /* left: 35%; */
+    width: 100%;
+    background: transparent;
+    visibility: visible;
+    opacity: 1;
+    transition: transform 0.3s ease-in-out;
+    overflow: visible;
+    max-height: none;
+    box-shadow: none;
+    transform: none;
+  }
+
+  /* Add scaling on hover to main nav items on desktop. */
+  .site-title > a {
+    display: inline-block;
+    transition: all 0.3s ease-in-out;
+  }
+  .site-title > a:hover,
+  ul#header-menu li a:hover {
+    transition: all 0.3s ease-in-out;
+    transform: scale(1.1);
+  }
+
+  /* Add scaling on hover to nav items on desktop. */
+  ul#header-menu li.menu-item-has-children ul.sub-menu li > a:hover {
+    transition: all 0.3s ease-in-out;
+    transform: scale(1.05);
+  }
 }
