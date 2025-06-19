@@ -58,6 +58,37 @@ if ( $videos_page ) {
 	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>"/>
 	<?php wp_head(); ?>
   <style>
+    .site-header {
+      padding: 0 1rem;
+    }
+
+    #header-image-wrapper {
+      position: relative;
+      width: 100%;
+    }
+    #header-image-wrapper #masthead {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 10;
+      background: transparent;
+      color: white;
+    }
+    .header-bg {
+      display: block;
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
+
+    /* Clear the background color of the hamburger menu on mobile. */
+    .main-navigation .main-navigation-wrapper .menu-toggle,
+    .main-navigation.toggled .main-navigation-wrapper .menu-toggle {
+      background-color: transparent;
+      color: white;
+    }
+
     body.page-template-vidoes #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-left .site-title a,
     body.page-template-vidoes #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .main-navigation-wrapper ul li a,
     body.page-template-vidoes #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .main-navigation-wrapper ul li a svg,
@@ -97,13 +128,13 @@ if ( $videos_page ) {
   <div class="site hfeed" id="page">
     <?php if ( $header_bg_url ) : ?>
       <div id="header-image-wrapper">
+        <img 
+        class="header-bg" 
+        src="<?php echo esc_url( $header_bg_url ); ?>" 
+        alt="<?php echo esc_attr( get_the_title() ); ?>"
+        >
         <div class="header-image-overlay">
-          <img 
-            class="header-bg" 
-            src="<?php echo esc_url( $header_bg_url ); ?>" 
-            alt="<?php echo esc_attr( get_the_title() ); ?>"
-          >
-          <div class="books-page__header-text-container">
+          <div class="products-page__header-text-container">
             <h1 <?php echo $banner_text_color ? 'style="color:' . esc_attr( $banner_text_color ) . '"' : ''?>><?php echo esc_html( $banner_header_text ); ?></h1>
             <h4 <?php echo $banner_text_color ? 'style="color:' . esc_attr( $banner_text_color ) . '"' : ''?>><?php echo esc_html( $banner_subheader_text ); ?></h4>
           </div>

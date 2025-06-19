@@ -58,6 +58,40 @@ if ( $books_page ) {
 	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>"/>
 	<?php wp_head(); ?>
   <style>
+    /* Custom styles for the Books page header. */
+    /* Add padding to the header for mobile */
+    .site-header {
+      padding: 0 1rem;
+    }
+
+    #header-image-wrapper {
+      position: relative;
+      width: 100%;
+    }
+    #header-image-wrapper #masthead {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 10;
+      background: transparent;
+      color: white;
+    }
+    .header-bg {
+      display: block;
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
+
+    /* Clear the background color of the hamburger menu on mobile. */
+    .main-navigation .main-navigation-wrapper .menu-toggle,
+    .main-navigation.toggled .main-navigation-wrapper .menu-toggle {
+      background-color: transparent;
+      color: white;
+    }
+
+    /* Use the custom fields for the banner's text colors. */
     body.page-template-books #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-left .site-title a,
     body.page-template-books #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .main-navigation-wrapper ul li a,
     body.page-template-books #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .main-navigation-wrapper ul li a svg,
@@ -65,20 +99,25 @@ if ( $books_page ) {
       color: <?php echo esc_attr( $nav_text_color ? $nav_text_color : '#fff' ); ?>;
       stroke: <?php echo esc_attr( $nav_text_color ? $nav_text_color : '#fff' ); ?>;
     }
+
+    /* Set the background color of the search form. */
     body.page-template-books #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .search-type-responsive-slide.search-active .search-form .res-search-wrapper {
       position: relative;
       background-color: white;
     }
+
+    /* Stack the search feature's submit button. */
     body.page-template-books #page #header-image-wrapper header#masthead 
       .responsive-site-primary-header-wrap .site-header-primary-section-right 
       .search-type-responsive-slide.search-active .search-form .res-search-wrapper button.search-submit {
         position: relative; /* take it out of the flow so it can stack */
         z-index: 2; /* make sure it is above background */
     }
+
+    /* Set the color of the search icon in the submit form. */
     body.page-template-books #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .search-type-responsive-slide.search-active .search-form .res-search-wrapper button.search-submit svg path {
       fill: black;
     }
-    
   </style>
 </head>
 
@@ -97,13 +136,13 @@ if ( $books_page ) {
   <div class="site hfeed" id="page">
     <?php if ( $header_bg_url ) : ?>
       <div id="header-image-wrapper">
+        <img 
+          class="header-bg" 
+          src="<?php echo esc_url( $header_bg_url ); ?>" 
+          alt="<?php echo esc_attr( get_the_title() ); ?>"
+        >
         <div class="header-image-overlay">
-          <img 
-            class="header-bg" 
-            src="<?php echo esc_url( $header_bg_url ); ?>" 
-            alt="<?php echo esc_attr( get_the_title() ); ?>"
-          >
-          <div class="books-page__header-text-container">
+          <div class="products-page__header-text-container">
             <h1 <?php echo $banner_text_color ? 'style="color:' . esc_attr( $banner_text_color ) . '"' : ''?>><?php echo esc_html( $banner_header_text ); ?></h1>
             <h4 <?php echo $banner_text_color ? 'style="color:' . esc_attr( $banner_text_color ) . '"' : ''?>><?php echo esc_html( $banner_subheader_text ); ?></h4>
           </div>
