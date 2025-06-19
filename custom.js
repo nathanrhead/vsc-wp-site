@@ -39,10 +39,12 @@ document.addEventListener('DOMContentLoaded', function () {
       const nav = document.getElementById('site-navigation');
       const isMenuOpen = nav.classList.contains('toggled');
 
-      if (isMenuOpen) {
-        // Menu is currently open, about to close
+      if (!isMenuOpen) {
+        // Menu was just closed
         document.querySelectorAll('#header-menu li.focus').forEach(item => {
           item.classList.remove('focus');
+          const submenu = item.querySelector(':scope > ul.sub-menu');
+          if (submenu) submenu.style.display = 'none';
         });
       }
     });
