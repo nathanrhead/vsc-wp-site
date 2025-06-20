@@ -55,6 +55,7 @@ document.addEventListener('DOMContentLoaded', function () {
 document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('#header-menu .menu-item-has-children .res-iconify').forEach(icon => {
     const parentLi = icon.closest('li.menu-item-has-children');
+    const link = parentLi.querySelector(':scope > a');
 
     const toggleSubmenu = e => {
       e.preventDefault();
@@ -64,12 +65,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const isFocused = parentLi.classList.contains('focus');
 
-      // Close other open submenus at the same level
       parentLi.parentElement.querySelectorAll(':scope > li.focus').forEach(li => {
         if (li !== parentLi) li.classList.remove('focus');
       });
 
-      // Toggle the current one
       parentLi.classList.toggle('focus', !isFocused);
       const submenu = parentLi.querySelector(':scope > ul.sub-menu');
       if (submenu) {
@@ -77,7 +76,15 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     };
 
-    // Use only pointerdown (not mousedown/click) for better compatibility
-    icon.addEventListener('pointerdown', toggleSubmenu);
+    // Support mobile and desktop interactions reliably
+    ['touchstart', 'mousedown', 'keydown'].forEach(eventType => {
+      icon.addEventListener(eventType, toggleSubmenu, { passive: false });
+    });
+
+    // Prevent accidental triggering of the link
+    icon.addEventListener('click', e => {
+      e.preventDefault();
+      e.stopPropagation();
+    }, { passive: false });
   });
 });

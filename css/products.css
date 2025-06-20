@@ -17,6 +17,8 @@ body.page-template-books #page #header-image-wrapper header#masthead .responsive
 body.page-template-videos #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap {
   background-color: transparent;
 }
+
+/* Make the header logo white. */
 body.page-template-books #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-left .site-title a,
 body.page-template-videos #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-left .site-title a {
   color: white;
@@ -34,20 +36,20 @@ body.page-template-books #page #header-image-wrapper header#masthead .responsive
 body.page-template-videos #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .main-navigation-wrapper ul li a,
 body.page-template-videos #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .main-navigation-wrapper ul li a svg {
   color: white;
-  background: transparent;
+  background-color: transparent;
   stroke: white;
 }
 
 /* Make the submenu's background transparent. */
 body.page-template-books #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .main-navigation-wrapper ul ul,
 body.page-template-videos #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .main-navigation-wrapper ul ul {
-  background: rgba(0, 0, 0, 0.4);;
+  background-color: black;
 }
 
 /* Make the search icon background transparent and the icon white. */
 body.page-template-books #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .responsive-header-search-icon-wrap,
 body.page-template-videos #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .responsive-header-search-icon-wrap {
-  background: transparent;
+  background-color: transparent;
   color: white;
 }
 
@@ -64,7 +66,7 @@ body.page-template-videos #page #header-image-wrapper header#masthead .responsiv
   transition: all 0.3s ease-in-out;
 }
 
-/* Style the banner text on the product's main page. */
+/* Hide the header text on the products' main pages. */
 .products-page__header-text-container {
   display: none;
 }
@@ -119,12 +121,6 @@ body.single-video .wp-block-columns .wp-block-column:first-child figure.wp-block
   padding: 0;
   object-fit: cover;
 }
-
-/* Force the second column to stretch. */
-/* .page_featured-list .wp-block-columns > .wp-block-column:nth-of-type(2) {
-  display: flex;
-  flex-direction: column;
-} */
 
 /* Ensure the right column fills the height. */
 .page_featured-list .wp-block-columns > .wp-block-column:nth-of-type(2) {
@@ -233,6 +229,11 @@ body.single-video .wp-block-columns .wp-block-column:first-child figure.wp-block
 }
 
 @media all and (width >= 1024px ) {
+  body.page-template-books #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .main-navigation-wrapper ul ul,
+  body.page-template-videos #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .main-navigation-wrapper ul ul {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
   /* Increase the font size of the banner text on desktop. */
   .products-page__header-text-container h1 {
     font-size: 5rem;
@@ -282,5 +283,4 @@ body.single-video .wp-block-columns .wp-block-column:first-child figure.wp-block
   .products-page__other-list ul li .wp-block-group > .wp-block-group {
     padding: 2rem;
   }
-  
 }
