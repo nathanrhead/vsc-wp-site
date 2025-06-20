@@ -1,4 +1,10 @@
 <?php
+// // Determine the template being use.
+// add_action('template_include', function ($template) {
+//   error_log('Template being used: ' . $template);
+//   return $template;
+// });
+
 // Enqueue parent and child styles
 function responsive_child_enqueue_styles() {
   // Enqueue parent theme stylesheet.
@@ -242,6 +248,17 @@ function register_book_price_block_assets() {
 }
 add_action('init', 'register_book_price_block_assets');
 
+// Add a class to the body tag for anything created with page.php.
+add_filter( 'body_class', function( $classes ) {
+
+  error_log( 'is post?: ' . ( is_singular( 'post' ) ? 'tis true' : 'tis false' ) );
+  
+  if ( is_singular('post') || ( is_page() && ( get_page_template_slug() === '' || get_page_template_slug() === 'elementor_header_footer' ) ) ) {
+    $classes[] = 'not-custom-page-type';
+  }
+  return $classes;
+} );
+
 // // View all actions.
 // add_action('all', function ($hook_name = null) {
 //   static $seen = [];
@@ -250,4 +267,3 @@ add_action('init', 'register_book_price_block_assets');
 //     error_log('Hook: ' . current_filter());
 //   }
 // });
-

@@ -1,5 +1,4 @@
 /* === Style the products' custom post-types. === */
-
 /* Set the product custom post-type's width to full. */
 body.single-book.single #primary.content-area,
 body.single-video.single #primary.content-area {
@@ -109,13 +108,10 @@ body.single-video .wp-block-columns .wp-block-column:first-child figure.wp-block
   /* aspect-ratio: 2 / 3; */
 }
 
-/* .page_featured-list .wp-block-column:nth-of-type(1) figure.wp-block-post-featured-image img,
-body.single-video .wp-block-columns .wp-block-column:first-child figure.wp-block-post-featured-image img {
-  max-width: none;
-  width: 100%;
-  padding: 0;
-  border-radius: 10px;
-  object-fit: cover;
-  height: 100%;
-  display: block;
-} */
+@media all and (width >= 768px) {
+  body.single-book.single,
+  body.single-vidoe.single {
+    width: 90%;
+    margin: auto;
+  }
+}
