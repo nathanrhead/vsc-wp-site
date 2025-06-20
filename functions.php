@@ -142,7 +142,7 @@ add_filter('render_block', function ($block_content, $block) {
 
 // Remove the "Read More" link from the excerpt block on custom post-type = book.
 add_filter( 'render_block', function ( $block_content, $block ) {
-  if ( get_post_type() === 'book' && $block['blockName'] === 'core/post-excerpt' && (strpos( $block_content, 'Read more' ) !== false || strpos( $block_content, 'Read More' ) !== false )
+  if ( $block['blockName'] === 'core/post-excerpt' && (strpos( $block_content, 'Read more' ) !== false || strpos( $block_content, 'Read More' ) !== false )
   ) {
     // Remove everything after ellipses (if present), preserving ellipses.
     $block_content = preg_replace(

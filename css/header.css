@@ -86,16 +86,18 @@
   width: 100%;
 }
 /* Style the currently active nav link. */
-#header-menu li.current_page_item > a {
+#header-menu li.current_page_item > a,
+#header-menu li.current_page_item > a svg > path {
   background-color: transparent;
   color: #10659C;
+  stroke: #10659C;
 }
 /* Set the mobile menu's nav link color. */
 #header-menu li a {
-  color: white;
+  color: black;
 }
 #header-menu li a span svg path {
-  stroke: white
+  stroke: black
 }
 
 /* Add left indent to sub-menus. */
@@ -103,6 +105,11 @@
 #header-menu ul.sub-menu ul.sub-menu {
   padding-left: 1rem;
   box-shadow: none;
+}
+
+/* No transition color on hover */
+#header-menu li > a:hover {
+  background-color: transparent;
 }
 
 /* Fix the placement of the sub-menu caret. */

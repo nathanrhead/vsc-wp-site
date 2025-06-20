@@ -1,9 +1,9 @@
 /* === Style the products' custom post-types. === */
 
 /* For the products template, override Responsive's width restriction on main. */
-.page.page-template-books #primary.content-area,
-.page.page-template-videos #primary.content-area {
-  width: 100% !important;
+html body .page.page-template-books #primary.content-area,
+html body .page.page-template-videos #primary.content-area {
+  width: 100%;
 }
 
 /* Expand the header from edge to edge. */
@@ -31,14 +31,14 @@ body.page-template-videos #page #header-image-wrapper header#masthead .responsiv
 }
 
 /* Make the main navigation links white and background transparent. */
-body.page-template-books #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .main-navigation-wrapper ul li a,
+/* body.page-template-books #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .main-navigation-wrapper ul li a,
 body.page-template-books #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .main-navigation-wrapper ul li a svg,
 body.page-template-videos #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .main-navigation-wrapper ul li a,
 body.page-template-videos #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .main-navigation-wrapper ul li a svg {
   color: white;
   background-color: transparent;
   stroke: white;
-}
+} */
 
 /* Make the submenu's background transparent. */
 body.page-template-books #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .main-navigation-wrapper ul ul,
@@ -72,6 +72,11 @@ body.page-template-videos #page #header-image-wrapper header#masthead .responsiv
 }
 
 /* === Style the product's main page's featured-products section. === */
+/* Format in a column for mobile. */
+#page .page_featured-list .wp-block-columns {
+  flex-direction: column;
+}
+/* Adjust margins and alignment. */
 #page .page_featured-list {
   margin-top: 0rem;
   margin-bottom: 3rem;
@@ -96,8 +101,11 @@ body.page-template-videos #page #header-image-wrapper header#masthead .responsiv
 /* Adjust the padding of the featured-products list. */
 #page .page_featured-list .wp-block-columns li {
   padding: 0;
-  padding-bottom: 2rem;
+  /* padding-bottom: 2rem; */
   align-items: center;
+}
+#page .page_featured-list .wp-block-columns .wp-block-column:nth-of-type(2) li:nth-of-type(1) {
+  margin-bottom: 1rem;
 }
 .page_featured-list .wp-block-columns > .wp-block-column:nth-of-type(1) figure {
   padding: 2rem;
@@ -207,9 +215,21 @@ body.single-video .wp-block-columns .wp-block-column:first-child figure.wp-block
     text-align: center;
     margin-top: 1rem;
   }
+  .page_featured-list li > h2,
+  .page_featured-list li > h3 {
+    font-size: 2rem;
+    margin-top: 0;
+  }
 }
 
 @media all and (width >= 768px) {
+  /* Restrict the width of the main container. */
+  .page.page-template-books #primary.content-area,
+  .page.page-template-videos #primary.content-area {
+    width: 85% !important;
+    margin: auto;
+  }
+
   /* Increase the font size of the banner text. */
   .products-page__header-text-container h1 {
     font-size: 2.5rem;
@@ -218,9 +238,8 @@ body.single-video .wp-block-columns .wp-block-column:first-child figure.wp-block
     font-size: 1.2rem;
   }
 
-  /* Add margin top to the featured products' heading and justify headings to the left on desktop. */
+  /* Align section headers to the left. */
   #page .page_featured-list {
-    margin-top: 3rem;
     align-items: flex-start;
   }
   #page .products-page__other-list {
@@ -229,10 +248,28 @@ body.single-video .wp-block-columns .wp-block-column:first-child figure.wp-block
 }
 
 @media all and (width >= 1024px ) {
+  /* Reset the width of the main container. */
+  .page.page-template-books #primary.content-area,
+  .page.page-template-videos #primary.content-area {
+    width: 90% !important;
+  }
+  
+  /* Format the lists in a row for desktop. */
+  #page .page_featured-list .wp-block-columns,
+  .products-page__other-list ul li > div {
+    flex-direction: row;
+  }
+
+  .products-page__other-list ul li .wp-block-group .wp-block-group__inner-container {
+    align-items: flex-start;
+  }
+
+  /* Set the background color of menu dropdowns. */
   body.page-template-books #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .main-navigation-wrapper ul ul,
   body.page-template-videos #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .main-navigation-wrapper ul ul {
-  background-color: rgba(0, 0, 0, 0.6);
-}
+    /* background-color: rgba(0, 0, 0, 0.6); */
+    background-color: black;
+  }
 
   /* Increase the font size of the banner text on desktop. */
   .products-page__header-text-container h1 {
@@ -241,10 +278,32 @@ body.single-video .wp-block-columns .wp-block-column:first-child figure.wp-block
   .products-page__header-text-container h4 {
     font-size: 2rem;
   }  
-
+  
   /* Style the featured products' heading. */
-  #page .page_featured-list h2 {
+  #page .page_featured-list > h2 {
     font-size: 3rem;
+  }
+
+  /* Adjust the featured products' subheadings in the right column. */
+  .page_featured-list .wp-block-column:nth-of-type(2) li > h2 {
+    font-size: 1.5rem;
+  }
+
+  .page_featured-list .wp-block-column:nth-of-type(2) li {
+    margin: 0;
+  }
+  .page_featured-list .wp-block-column:nth-of-type(2) li.wp-block-column:nth-of-type(1) {
+    margin-bottom: 1rem;
+  }
+
+  .page_featured-list .wp-block-column:nth-of-type(2) li figure {
+    height: auto;
+    margin-bottom: 1rem;
+  }
+
+  /* Remove the description from the featured product's second column on the books page. */
+  .page-template-books .page_featured-list .wp-block-column:nth-of-type(2) li .wp-block-post-excerpt {
+    display: none;
   }
 
   /* Center the featured products' details. */
@@ -262,6 +321,7 @@ body.single-video .wp-block-columns .wp-block-column:first-child figure.wp-block
     border: 1px solid lightgray;
     border-radius: 10px;
     align-self: stretch;
+    padding: 0 2rem !important;
   }
 
   /* Put padding around the other-titles list inner div. */
@@ -283,4 +343,11 @@ body.single-video .wp-block-columns .wp-block-column:first-child figure.wp-block
   .products-page__other-list ul li .wp-block-group > .wp-block-group {
     padding: 2rem;
   }
+}
+
+@media all and (width >= 1180px) {
+  /* Add the description from the featured product's second column on the books page. */
+  .page-template-books .page_featured-list .wp-block-column:nth-of-type(2) li .wp-block-post-excerpt {
+    display: flex;
+  }  
 }

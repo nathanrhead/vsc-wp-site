@@ -92,10 +92,10 @@ if ( $books_page ) {
     }
 
     /* Use the custom fields for the banner's text colors. */
-    body.page-template-books #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-left .site-title a,
-    body.page-template-books #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .main-navigation-wrapper ul li a,
-    body.page-template-books #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .main-navigation-wrapper ul li a svg,
-    body.page-template-books #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .responsive-header-search-link .res-search-icon .responsive-header-search-icon-wrap .responsive-header-search-icon svg {
+    #header-image-wrapper .site-title a,
+    #header-image-wrapper #masthead ul#header-menu li a,
+    #header-image-wrapper #masthead ul#header-menu li a svg path,
+    #header-image-wrapper .res-search-icon svg {
       color: <?php echo esc_attr( $nav_text_color ? $nav_text_color : '#fff' ); ?>;
       stroke: <?php echo esc_attr( $nav_text_color ? $nav_text_color : '#fff' ); ?>;
     }
