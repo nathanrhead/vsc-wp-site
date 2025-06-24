@@ -88,3 +88,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { passive: false });
   });
 });
+
+// Remove the "focus" class before the link triggers page load, so that the submenu isn't rendered when the page link is clicked.
+document.querySelectorAll('.menu-item-has-children > a').forEach(link => {
+  link.addEventListener('click', e => {
+    const parent = link.closest('.menu-item-has-children');
+    parent.classList.remove('focus');
+  });
+});
