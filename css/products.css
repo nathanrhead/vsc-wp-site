@@ -1,34 +1,32 @@
 /* === Style the products' custom post-types. === */
 
 /* For the products template, override Responsive's width restriction on main. */
-html body .page.page-template-books #primary.content-area,
+/* html body .page.page-template-books #primary.content-area,
 html body .page.page-template-videos #primary.content-area {
   width: 100%;
-}
+} */
 
 /* Expand the header from edge to edge. */
 .page-template-books.books-header-page .site.hfeed,
-.page-template-videos.videos-header-page .site.hfeed {
+.page-template-videos.videos-header-page .site.hfeed,
+.page-template-podcasts.podcasts-header-page .site.hfeed,
+.page-template-blogs.blogs-header-page .site.hfeed {
   max-width: 100%;
 }
 
-/* Make the header's background color transparent. */
-body.page-template-books #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap,
-body.page-template-videos #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap {
-  background-color: transparent;
-}
-
 /* Make the header logo white. */
-body.page-template-books #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-left .site-title a,
-body.page-template-videos #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-left .site-title a {
+/* body.page-template-books #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-left .site-title a,
+body.page-template-videos #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-left .site-title a,
+body.page-template-podcasts #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-left .site-title a,
+body.page-template-blogs #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-left .site-title a {
   color: white;
-}
+} */
 
 /* Make the main navigation background color transparent. */
-body.page-template-books #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .main-navigation-wrapper,
+/* body.page-template-books #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .main-navigation-wrapper,
 body.page-template-videos #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .main-navigation-wrapper {
   background-color: transparent;
-}
+} */
 
 /* Make the main navigation links white and background transparent. */
 /* body.page-template-books #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .main-navigation-wrapper ul li a,
@@ -40,15 +38,19 @@ body.page-template-videos #page #header-image-wrapper header#masthead .responsiv
   stroke: white;
 } */
 
-/* Make the submenu's background transparent. */
+/* Make the submenu's background black. */
 body.page-template-books #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .main-navigation-wrapper ul ul,
-body.page-template-videos #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .main-navigation-wrapper ul ul {
+body.page-template-videos #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .main-navigation-wrapper ul ul,
+body.page-template-podcasts #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .main-navigation-wrapper ul ul,
+body.page-template-blogs #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .main-navigation-wrapper ul ul {
   background-color: black;
 }
 
 /* Make the search icon background transparent and the icon white. */
-body.page-template-books #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .responsive-header-search-icon-wrap,
-body.page-template-videos #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .responsive-header-search-icon-wrap {
+body.page-template-books #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .res-search-icon > div,
+body.page-template-videos #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .res-search-icon > div,
+body.page-template-podcasts #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .res-search-icon > div,
+body.page-template-blogs #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .res-search-icon > div {
   background-color: transparent;
   color: white;
 }
@@ -62,11 +64,13 @@ body .site.hfeed header#masthead .responsive-site-header-wrap .site-header-inner
   transition: all 0.3s ease-in-out;
 }
 body.page-template-books #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .responsive-header-search-link .res-search-icon .responsive-header-search-icon-wrap .responsive-header-search-icon svg,
-body.page-template-videos #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .responsive-header-search-link .res-search-icon .responsive-header-search-icon-wrap .responsive-header-search-icon svg {
+body.page-template-videos #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .responsive-header-search-link .res-search-icon .responsive-header-search-icon-wrap .responsive-header-search-icon svg,
+body.page-template-podcasts #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .responsive-header-search-link .res-search-icon .responsive-header-search-icon-wrap .responsive-header-search-icon svg,
+body.page-template-blogs #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .responsive-header-search-link .res-search-icon .responsive-header-search-icon-wrap .responsive-header-search-icon svg {
   transition: all 0.3s ease-in-out;
 }
 
-/* Hide the header text on the products' main pages. */
+/* Hide the banner text on the products' main pages on mobile. */
 .products-page__header-text-container {
   display: none;
 }
@@ -101,11 +105,11 @@ body.page-template-videos #page #header-image-wrapper header#masthead .responsiv
 /* Adjust the padding of the featured-products list. */
 #page .page_featured-list .wp-block-columns li {
   padding: 0;
-  /* padding-bottom: 2rem; */
+  padding-bottom: 2rem;
   align-items: center;
 }
-#page .page_featured-list .wp-block-columns .wp-block-column:nth-of-type(2) li:nth-of-type(1) {
-  margin-bottom: 1rem;
+#page .page_featured-list .wp-block-columns li:last-child {
+  padding-bottom: 0;
 }
 .page_featured-list .wp-block-columns > .wp-block-column:nth-of-type(1) figure {
   padding: 2rem;
@@ -114,6 +118,9 @@ body.page-template-videos #page #header-image-wrapper header#masthead .responsiv
 .page_featured-list .wp-block-columns > .wp-block-column:nth-of-type(1) figure.wp-block-post-featured-image,
 body.single-video .wp-block-columns .wp-block-column:first-child figure.wp-block-post-featured-image {
   height: 100%;
+}
+.page_featured-list .wp-block-columns > .wp-block-column:nth-of-type(1) figure.wp-block-post-featured-image {
+  min-height: 50vh;
 }
 /* Stretch to full height. */
 .page_featured-list .wp-block-column ul li {
@@ -142,11 +149,12 @@ body.single-video .wp-block-columns .wp-block-column:first-child figure.wp-block
   flex-grow: 1;
   display: flex;
   flex-direction: column;
+  justify-content: center;
 }
 
 /* Make the right column's UL grow to full height. */
 .page_featured-list .wp-block-column:nth-of-type(2) ul.wp-block-post-template {
-  flex-grow: 1;
+  /* flex-grow: 1; */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -174,6 +182,11 @@ body.single-video .wp-block-columns .wp-block-column:first-child figure.wp-block
 .products-page__other-list ul li figure.wp-block-post-featured-image a {
   height: auto;
 }
+/* Reset the other list's images to have a full width. */
+.products-page__other-list .wp-block-post-template .wp-block-post-featured-image img {
+  max-width: 100%;
+  max-height: 300px;
+}
 /* Style the list of products on the product's main page. */
 .products-page__other-list p {
   margin-bottom: 2rem;
@@ -190,7 +203,7 @@ body.single-video .wp-block-columns .wp-block-column:first-child figure.wp-block
 .products-page__other-list ul li .wp-block-group .wp-block-group__inner-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  /* align-items: center; */
   justify-content: center;
 }
 /* Stack the other list's buy buttons. */
@@ -225,7 +238,9 @@ body.single-video .wp-block-columns .wp-block-column:first-child figure.wp-block
 @media all and (width >= 768px) {
   /* Restrict the width of the main container. */
   .page.page-template-books #primary.content-area,
-  .page.page-template-videos #primary.content-area {
+  .page.page-template-videos #primary.content-area,
+  .page.page-template-podcasts #primary.content-area,
+  .page.page-template-blogs #primary.content-area {
     width: 85% !important;
     margin: auto;
   }
@@ -250,7 +265,9 @@ body.single-video .wp-block-columns .wp-block-column:first-child figure.wp-block
 @media all and (width >= 1024px ) {
   /* Reset the width of the main container. */
   .page.page-template-books #primary.content-area,
-  .page.page-template-videos #primary.content-area {
+  .page.page-template-videos #primary.content-area,
+  .page.page-template-podcasts #primary.content-area,
+  .page.page-template-blogs #primary.content-area {
     width: 90% !important;
   }
   
@@ -266,7 +283,9 @@ body.single-video .wp-block-columns .wp-block-column:first-child figure.wp-block
 
   /* Set the background color of menu dropdowns. */
   body.page-template-books #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .main-navigation-wrapper ul ul,
-  body.page-template-videos #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .main-navigation-wrapper ul ul {
+  body.page-template-videos #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .main-navigation-wrapper ul ul,
+  body.page-template-podcasts #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .main-navigation-wrapper ul ul,
+  body.page-template-blogs #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .main-navigation-wrapper ul ul {
     /* background-color: rgba(0, 0, 0, 0.6); */
     background-color: black;
   }
@@ -308,7 +327,7 @@ body.single-video .wp-block-columns .wp-block-column:first-child figure.wp-block
 
   /* Center the featured products' details. */
   #page .page_featured-list .wp-block-columns li {
-    padding: 0;
+    /* padding: 0; */
     align-items: flex-start;
   }
 

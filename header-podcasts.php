@@ -39,7 +39,7 @@ if ( $podcasts_page ) {
   $banner_header_text = get_post_meta( $podcasts_page->ID, 'banner-header-text', true );
   $banner_subheader_text = get_post_meta( $podcasts_page->ID, 'banner-subheader-text', true );
   if ( !$banner_header_text ) $banner_header_text = 'Podcasts';
-  if ( !$banner_subheader_text ) $banner_subheader_text = 'by V S Campbell';
+  if ( !$banner_subheader_text ) $banner_subheader_text = '';
   $banner_text_color = get_post_meta( $podcasts_page->ID, 'banner-text-color',  true );
   $nav_text_color = get_post_meta( $podcasts_page->ID, 'nav-text-color',  true );
 }
@@ -87,10 +87,10 @@ if ( $podcasts_page ) {
     }
 
     /* Use the custom fields for the banner's text colors. */
-    #header-image-wrapper .site-title a,
-    #header-image-wrapper #masthead ul#header-menu li a,
-    #header-image-wrapper #masthead ul#header-menu li a svg path,
-    #header-image-wrapper .res-search-icon svg {
+    .site-title a,
+    #masthead ul#header-menu li a,
+    #masthead ul#header-menu li a svg path,
+    .res-search-icon svg {
       color: <?php echo esc_attr( $nav_text_color ? $nav_text_color : '#fff' ); ?>;
       stroke: <?php echo esc_attr( $nav_text_color ? $nav_text_color : '#fff' ); ?>;
     }
@@ -121,7 +121,7 @@ if ( $podcasts_page ) {
     $header_bg_url = has_post_thumbnail() ? get_the_post_thumbnail_url( get_the_ID(), 'full' ) : '';
   ?>
 <body 
-  <?php body_class( 'books-header-page' ); ?> 
+  <?php body_class( 'podcasts-header-page' ); ?> 
   <?php responsive_schema_markup( 'body' ); ?> >
   <?php wp_body_open(); ?>
   <div class="skip-container cf">

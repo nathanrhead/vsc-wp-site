@@ -49,7 +49,7 @@
   /* overflow: hidden; */
 }
 .wp-block-post-template .wp-block-post-featured-image img {
-  max-width: 200px;
+  max-width: 100%;
   width: auto;
   height: auto;
   display: block;
@@ -66,4 +66,19 @@
 #page .elementor div {
   position: static;
   overflow: visible;
+}
+
+/* Reduce the padding at the top of page content. */
+html .res-transparent-header .site-content {
+  padding-top: 3rem;
+}
+
+.wp-block-post .wp-block-group .wp-block-post-featured-image > a {
+  display: flex;
+}
+
+@media all and (width >= 1180px) {
+  .wp-block-post-template .wp-block-post-featured-image img {
+    max-width: 200px;
+  }
 }

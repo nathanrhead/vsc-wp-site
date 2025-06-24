@@ -304,3 +304,8 @@ add_filter( 'body_class', function( $classes ) {
 //     error_log('Hook: ' . current_filter());
 //   }
 // });
+
+// // Get the theme's style settings.
+// echo '<pre>';
+// print_r( get_theme_mods() );
+// echo '</pre>';

@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: Videos Page
+ * Template Name: Blogs Page
  * Pages Template
  */
 

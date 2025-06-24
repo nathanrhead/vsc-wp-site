@@ -86,18 +86,17 @@
   width: 100%;
 }
 /* Style the currently active nav link. */
-#header-menu li.current_page_item > a,
-#header-menu li.current_page_item > a svg > path {
+body #masthead ul#header-menu li.current_page_item.current-menu-item > a,
+body #masthead ul#header-menu li.current_page_item.current-menu-item > a svg > path {
   background-color: transparent;
-  color: #10659C;
-  stroke: #10659C;
+  text-decoration: underline;
 }
 /* Set the mobile menu's nav link color. */
 #header-menu li a {
   color: black;
 }
 #header-menu li a span svg path {
-  stroke: black
+  stroke: black;
 }
 
 /* Add left indent to sub-menus. */
@@ -107,7 +106,7 @@
   box-shadow: none;
 }
 
-/* No transition color on hover */
+/* No transition color on hover. */
 #header-menu li > a:hover {
   background-color: transparent;
 }
@@ -136,9 +135,10 @@ ul#header-menu li a:hover {
   transform: none;
 }
 
-/* Remove the border around the search feature's spy-glass icon. */
+/* Remove the border around the search feature's spy-glass icon and add a white background. */
 .res-search-icon .responsive-header-search-icon-wrap {
   border: none;
+  background-color: white;
 }
 
 /* Style the search-feature's overlay. */
@@ -188,10 +188,6 @@ ul#header-menu li a:hover {
   /* Ensure sub-submenus are positioned correctly. */
   #header-menu ul.sub-menu li {
     display: block;
-  }
-  #header-menu ul.sub-menu ul.sub-menu {
-    left: 0;
-    top: 3.5rem;
   }
 
   /* Style the sub-menu links. */
@@ -260,5 +256,12 @@ ul#header-menu li a:hover {
   ul#header-menu li.menu-item-has-children ul.sub-menu li > a:hover {
     transition: all 0.3s ease-in-out;
     transform: scale(1.05);
+  }
+}
+
+@media all and (width >= 1367px) {
+  #header-menu ul.sub-menu ul.sub-menu {
+    left: 100%;
+    top:0;
   }
 }

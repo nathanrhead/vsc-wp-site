@@ -38,12 +38,8 @@ $books_page = get_page_by_path( 'books' );
 if ( $books_page ) {
   $banner_header_text = get_post_meta( $books_page->ID, 'banner-header-text', true );
   $banner_subheader_text = get_post_meta( $books_page->ID, 'banner-subheader-text', true );
-  if ( ! $banner_header_text ) {
-    $banner_header_text = 'Books';
-  }
-  if ( ! $banner_subheader_text ) {
-    $banner_subheader_text = 'by V S Campbell';
-  }
+  if ( ! $banner_header_text ) $banner_header_text = 'Books';
+  if ( !$banner_subheader_text ) $banner_subheader_text = '';
   $banner_text_color = get_post_meta( $books_page->ID, 'banner-text-color',  true );
   $nav_text_color = get_post_meta( $books_page->ID, 'nav-text-color',  true );
 }
@@ -91,10 +87,10 @@ if ( $books_page ) {
     }
 
     /* Use the custom fields for the banner's text colors. */
-    #header-image-wrapper .site-title a,
-    #header-image-wrapper #masthead ul#header-menu li a,
-    #header-image-wrapper #masthead ul#header-menu li a svg path,
-    #header-image-wrapper .res-search-icon svg {
+    .site-title a,
+    #masthead ul#header-menu li a,
+    #masthead ul#header-menu li a svg path,
+    .res-search-icon svg {
       color: <?php echo esc_attr( $nav_text_color ? $nav_text_color : '#fff' ); ?>;
       stroke: <?php echo esc_attr( $nav_text_color ? $nav_text_color : '#fff' ); ?>;
     }
