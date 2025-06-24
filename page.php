@@ -3,8 +3,8 @@
  * Pages Template
  *
  * @file           page.php
- * @package        Responsive
- * @author         CyberChimps
+ * @package        Responsive Child
+ * @author         Nathan Cox abd CyberChimps
  * @copyright      2020 CyberChimps
  * @license        license.txt
  * @version        Release: 1.0

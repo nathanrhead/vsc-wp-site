@@ -110,6 +110,43 @@ function register_video_post_type() {
 }
 add_action('init', 'register_video_post_type');
 
+// Register a custom post type for podcasts.
+function register_podcast_post_type() {
+  $labels = array(
+    'name'               => 'Podcasts',
+    'singular_name'      => 'Podcast',
+    'menu_name'          => 'Podcasts',
+    'name_admin_bar'     => 'Podcast',
+    'add_new'            => 'Add New',
+    'add_new_item'       => 'Add New Podcast',
+    'new_item'           => 'New Podcast',
+    'edit_item'          => 'Edit Podcast',
+    'view_item'          => 'View Podcast',
+    'all_items'          => 'All Podcasts',
+    'search_items'       => 'Search Podcasts',
+    'parent_item_colon'  => 'Parent Podcasts:',
+    'not_found'          => 'No podcasts found.',
+    'not_found_in_trash' => 'No podcasts found in Trash.',
+  );
+
+  $args = array(
+    'labels'             => $labels,
+    'public'             => true,
+    'has_archive'        => true,
+    'rewrite'            => array('slug' => 'video'),
+    'show_in_rest'       => true, // Enable Gutenberg and REST API
+    'supports'           => array('title', 'editor', 'excerpt', 'thumbnail', 'custom-fields'),
+    'menu_position'      => 6,
+    'menu_icon'          => 'dashicons-microphone',
+    'hierarchical'       => false,
+    'taxonomies'        => array('category', 'post_tag'), // Add categories and tags support
+  );
+
+  register_post_type('podcast', $args);
+}
+add_action('init', 'register_podcast_post_type');
+
+
 // Handler for both [book_buy_url] and [ebook_buy_url] pseudo-shortcodes.
 add_filter('render_block', function ($block_content, $block) {
   if (strpos($block_content, '[book_buy_url]') !== false || strpos($block_content, '[ebook_buy_url]') !== false) {

@@ -1,14 +1,14 @@
 <?php
 /**
- * Header Template for Books page
+ * Header Template for Blogs page
  *
- * @file           header-books.php
+ * @file           header-blogs.php
  * @package        Responsive Child Theme
  * @author         Nathan Cox
  * @copyright      2025 Nathan Cox
  * @license        license.txt
  * @version        Release: 1.0
- * @filesource     wp-content/themes/responsive-child/header-books.php
+ * @filesource     wp-content/themes/responsive-child/header-blogs.php
  */
 
 // Exit if accessed directly.
@@ -33,19 +33,19 @@ if ( ! function_exists( 'check_is_responsive_addons_greater' ) ) {
 	}
 }
 
-// Get nav and banner text and colors from the Books page's custom fields.
-$books_page = get_page_by_path( 'books' );
-if ( $books_page ) {
-  $banner_header_text = get_post_meta( $books_page->ID, 'banner-header-text', true );
-  $banner_subheader_text = get_post_meta( $books_page->ID, 'banner-subheader-text', true );
+// Get nav and banner text and colors from the Blogs page's custom fields.
+$blogs_page = get_page_by_path( 'blogs' );
+if ( $blogs_page ) {
+  $banner_header_text = get_post_meta( $blogs_page->ID, 'banner-header-text', true );
+  $banner_subheader_text = get_post_meta( $blogs_page->ID, 'banner-subheader-text', true );
   if ( ! $banner_header_text ) {
-    $banner_header_text = 'Books';
+    $banner_header_text = 'Blogs';
   }
   if ( ! $banner_subheader_text ) {
     $banner_subheader_text = 'by V S Campbell';
   }
-  $banner_text_color = get_post_meta( $books_page->ID, 'banner-text-color',  true );
-  $nav_text_color = get_post_meta( $books_page->ID, 'nav-text-color',  true );
+  $banner_text_color = get_post_meta( $blogs_page->ID, 'banner-text-color',  true );
+  $nav_text_color = get_post_meta( $blogs_page->ID, 'nav-text-color',  true );
 }
 ?>
 <!doctype html>
