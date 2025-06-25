@@ -4,7 +4,7 @@
   "title": "Book Price",
   "category": "widgets",
   "icon": "cart",
-  "description": "Displays book price dynamically.",
+  "description": "Displays a book's price, when it is entered in the custom fields of the book post.",
   "editorScript": "book-price-editor-script",
   "render": "file:./render.php",
   "usesContext": ["postId"],

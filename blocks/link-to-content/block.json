@@ -1,0 +1,27 @@
+{
+  "apiVersion": 2,
+  "name": "responsive-child/link-to-content",
+  "title": "Link to Content",
+  "category": "media",
+  "icon": "admin-links",
+  "description": "Wrap content in a link to another page, whether internal or external.",
+  "editorScript": "link-to-content-editor-script",
+  "usesContext": ["postId"],
+  "supports": {
+    "html": false
+  },
+  "attributes": {
+    "url": {
+      "type": "string",
+      "default": ""
+    },
+    "opensInNewTab": {
+      "type": "boolean",
+      "default": false
+    },
+    "rel": {
+      "type": "string",
+      "default": ""
+    }
+  }
+}

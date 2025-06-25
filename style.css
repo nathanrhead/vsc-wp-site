@@ -77,8 +77,32 @@ html .res-transparent-header .site-content {
   display: flex;
 }
 
+/* Add a border to the comments section. */
+#respond {
+  border: 1px solid lightgray;
+}
+
+/* Hide and show the iframe on video posts when the menu is open. */
+.wp-block-embed__wrapper {
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+  opacity: 1;
+  visibility: visible;
+}
+.wp-block-embed__wrapper.iframe-hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
 @media all and (width >= 1180px) {
   .wp-block-post-template .wp-block-post-featured-image img {
-    max-width: 200px;
+    max-width: 90%;
+  }
+
+  body.single:not(.single-product).responsive-site-style-boxed #primary.content-area {
+    width: 100%;
+    padding: 0;
+  }
+  body.single:not(.single-product).responsive-site-style-boxed #primary.content-area > article {
+    padding: 0;
   }
 }

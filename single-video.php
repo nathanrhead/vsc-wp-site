@@ -16,6 +16,7 @@ if (
   while ( have_posts() ) :
     the_post();
     get_template_part( 'partials/single/layout', 'book' );
+    comments_template();
   endwhile;
 
   get_template_part( 'loop-nav', get_post_type() );

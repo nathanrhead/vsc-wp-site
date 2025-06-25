@@ -1,11 +1,11 @@
 <?php
 // // Determine the template being use.
 // add_action('template_include', function ($template) {
-//   error_log('Template being used: ' . $template);
+//   echo 'Template being used: ' . $template;
 //   return $template;
 // });
 
-// Enqueue parent and child styles
+// Enqueue parent and child styles.
 function responsive_child_enqueue_styles() {
   // Enqueue parent theme stylesheet.
   wp_enqueue_style('parent-style', get_template_directory_uri() . '/style.css');
@@ -38,7 +38,7 @@ function responsive_child_enqueue_scripts() {
 }
 add_action('wp_enqueue_scripts', 'responsive_child_enqueue_scripts');
 
-// Register a custom post type for books.
+// Register a custom post-type for books.
 function register_book_post_type() {
   $labels = array(
     'name'               => 'Books',
@@ -63,7 +63,7 @@ function register_book_post_type() {
     'has_archive'        => true,
     'rewrite'            => array('slug' => 'book'),
     'show_in_rest'       => true, // Enable Gutenberg and REST API
-    'supports'           => array('title', 'editor', 'excerpt', 'thumbnail', 'custom-fields'),
+    'supports'           => array('title', 'editor', 'excerpt', 'thumbnail', 'custom-fields', 'comments'),
     'menu_position'      => 5,
     'menu_icon'          => 'dashicons-book-alt',
     'hierarchical'       => false,
@@ -74,7 +74,7 @@ function register_book_post_type() {
 }
 add_action('init', 'register_book_post_type');
 
-// Register a custom post type for videos.
+// Register a custom post-type for videos.
 function register_video_post_type() {
   $labels = array(
     'name'               => 'Videos',
@@ -99,7 +99,7 @@ function register_video_post_type() {
     'has_archive'        => true,
     'rewrite'            => array('slug' => 'video'),
     'show_in_rest'       => true, // Enable Gutenberg and REST API
-    'supports'           => array('title', 'editor', 'excerpt', 'thumbnail', 'custom-fields'),
+    'supports'           => array('title', 'editor', 'excerpt', 'thumbnail', 'custom-fields', 'comments'),
     'menu_position'      => 6,
     'menu_icon'          => 'dashicons-video-alt',
     'hierarchical'       => false,
@@ -110,7 +110,7 @@ function register_video_post_type() {
 }
 add_action('init', 'register_video_post_type');
 
-// Register a custom post type for podcasts.
+// Register a custom post-type for podcasts.
 function register_podcast_post_type() {
   $labels = array(
     'name'               => 'Podcasts',
@@ -135,7 +135,7 @@ function register_podcast_post_type() {
     'has_archive'        => true,
     'rewrite'            => array('slug' => 'video'),
     'show_in_rest'       => true, // Enable Gutenberg and REST API
-    'supports'           => array('title', 'editor', 'excerpt', 'thumbnail', 'custom-fields'),
+    'supports'           => array('title', 'editor', 'excerpt', 'thumbnail', 'custom-fields', 'comments'),
     'menu_position'      => 6,
     'menu_icon'          => 'dashicons-microphone',
     'hierarchical'       => false,
@@ -207,10 +207,10 @@ add_filter( 'render_block', function ( $block_content, $block ) {
   return $block_content;
 }, 10, 2);
 
-// Exclude the book featured on a book custom post-type from Query Loop blocks.
+// Exclude the book featured on a book custom post-type from Query Loop blocks. 
 add_filter( 'query_loop_block_query_vars', function ( $query_args, $block_context ) {
   if (
-    ! empty( $query_args['post_type'] ) &&
+    !empty( $query_args['post_type'] ) &&
     $query_args['post_type'] === 'book' &&
     is_singular( 'book' )
   ) {
@@ -237,7 +237,7 @@ add_filter( 'query_loop_block_query_vars', function ( $query_args, $block_contex
 }, 10, 2 );
 
 // Add the book-detail page's link to the image of the query loop.
-add_filter( 'render_block', function( $block_content, $block ) {
+add_filter( 'render_block', function( $block_content, $block ) {  
   if ( 
     $block['blockName'] === 'core/post-featured-image' 
     // && is_singular( 'book' ) === true 
@@ -252,21 +252,26 @@ add_filter( 'render_block', function( $block_content, $block ) {
     }
 
     if ( $post_id ) {
-      $permalink = get_permalink( $post_id );
-
-      // Wrap the existing image content with a link.
-      $block_content = preg_replace(
-        '/(<figure.*?>)(.*?)(<\/figure>)/is',
-        '$1<a href="' . esc_url( $permalink ) . '">$2</a>$3',
-        $block_content
-      );
+      // Skip wrapping if we're inside a Query Loop on a single post view of that same post
+      if ( is_singular() && get_queried_object_id() === $post_id ) {
+        return $block_content;
+      } else {
+        $permalink = get_permalink( $post_id );
+  
+        // Wrap the existing image content with a link.
+        $block_content = preg_replace(
+          '/(<figure.*?>)(.*?)(<\/figure>)/is',
+          '$1<a href="' . esc_url( $permalink ) . '">$2</a>$3',
+          $block_content
+        );
+      }
     }
   }
 
   return $block_content;
 }, 10, 2 );
 
-// Register editor-visible block using block.json metadata.
+// Register editor-visible book-price block using block.json metadata.
 function register_book_price_block_metadata() {
   register_block_type_from_metadata(
     get_stylesheet_directory() . '/blocks/book-price'
@@ -274,7 +279,7 @@ function register_book_price_block_metadata() {
 }
 add_action('init', 'register_book_price_block_metadata');
 
-// Register the block's assets for the editor.
+// Register the book-price block's assets for the editor.
 function register_book_price_block_assets() {
   wp_register_script(
     'book-price-editor-script',
@@ -285,16 +290,67 @@ function register_book_price_block_assets() {
 }
 add_action('init', 'register_book_price_block_assets');
 
-// Add a class to the body tag for anything created with page.php.
-add_filter( 'body_class', function( $classes ) {
+// Register editor-visible link-to-content block using block.json metadata.
+function register_link_to_content_block_metadata() {
+  register_block_type_from_metadata( get_stylesheet_directory() . '/blocks/link-to-content' );
+}
+add_action('init', 'register_link_to_content_block_metadata' );
 
-  error_log( 'is post?: ' . ( is_singular( 'post' ) ? 'tis true' : 'tis false' ) );
-  
+// Register the link-to-content block's assets for the editor.
+function register_link_to_content_block_assets() {
+  wp_register_script( 'link-to-content-editor-script', get_stylesheet_directory_uri() . '/blocks/link-to-content/index.js', ['wp-blocks', 'wp-element', 'wp-editor'], filemtime( get_stylesheet_directory() . '/blocks/link-to-content/index.js' ) );
+}
+add_action('init', 'register_link_to_content_block_assets' );
+
+// Add a class to the body tag for anything created with page.php.
+add_filter( 'body_class', function( $classes ) {  
   if ( is_singular('post') || ( is_page() && ( get_page_template_slug() === '' || get_page_template_slug() === 'elementor_header_footer' ) ) ) {
     $classes[] = 'not-custom-page-type';
   }
   return $classes;
 } );
+
+// Split blog-post content into two parts, the first to be rendered on page load, the second on user click.
+function truncate_html($html, $limit = 3000) {
+  if (mb_strlen(strip_tags($html)) <= $limit) {
+    return [
+      'truncated' => $html,
+      'remainder' => ''
+    ];
+  }
+
+  libxml_use_internal_errors(true);
+  $doc = new DOMDocument();
+  $doc->loadHTML('<?xml encoding="UTF-8"><div>' . $html . '</div>', LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+  libxml_clear_errors();
+
+  $wrapper = $doc->documentElement;
+  $truncated = '';
+  $remainder = '';
+  $count = 0;
+  $limit_reached = false;
+
+  foreach ($wrapper->childNodes as $node) {
+    if (!($node instanceof DOMElement)) continue;
+
+    $node_html = $doc->saveHTML($node);
+    $node_text = strip_tags($node_html);
+    $len = mb_strlen($node_text);
+
+    if (!$limit_reached && ($count + $len) <= $limit) {
+      $truncated .= $node_html;
+      $count += $len;
+    } else {
+      $limit_reached = true;
+      $remainder .= $node_html;
+    }
+  }
+
+  return [
+    'truncated' => $truncated,
+    'remainder' => $remainder ? '<div style="margin-top: 1.5em;">' . $remainder . '</div>' : ''
+  ];
+}
 
 // // View all actions.
 // add_action('all', function ($hook_name = null) {

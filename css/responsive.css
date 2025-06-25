@@ -34,7 +34,7 @@
   }
 }
 
-@media all and (width >= 768px) {
+@media all and (width >= 1366px) {
   .site.hfeed {
     max-width: 100%;
   }  

@@ -179,7 +179,8 @@ body.single-video .wp-block-columns .wp-block-column:first-child figure.wp-block
 }
 /* Set the images's height to auto to center them in their containers in the product's main page's featured and other-titles lists. */
 .page_featured-list ul li figure.wp-block-post-featured-image a,
-.products-page__other-list ul li figure.wp-block-post-featured-image a {
+.products-page__other-list ul li figure.wp-block-post-featured-image a,
+figure.wp-block-post-featured-image a {
   height: auto;
 }
 /* Reset the other list's images to have a full width. */

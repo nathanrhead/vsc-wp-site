@@ -57,6 +57,13 @@ article.book.type-book .wp-block-columns > .wp-block-column:first-child {
   margin: 0;
 }
 
+/* Style the hero's background. */
+.single figure {
+  background-color: #F7F7F7;
+  padding: 2rem;
+  border-radius: 10px;
+}
+
 /* Set the margins for the header, subheader, and description on product-detail post. */
 .single-book h2,
 .single-video h2,
@@ -88,6 +95,11 @@ article.book.type-book .wp-block-columns > .wp-block-column:first-child {
 .single-book h2.book-detail-other-titles,
 .single-video h2.book-detail-other-titles {
   margin: 3rem 0 1rem 0;
+}
+
+/* Remove padding from the other titles' figure. */
+.product__other-titles figure.wp-block-post-featured-image {
+  padding: 0;
 }
 
 /* Style the product page's price container. */

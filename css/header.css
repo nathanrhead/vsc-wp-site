@@ -26,7 +26,6 @@
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.3); /* this dims the banner's background image. */
-  /* z-index: 5; */
 }
 #header-image-wrapper {
   position: relative;
@@ -39,11 +38,10 @@
   max-height: calc(100vh - 5rem); /* fallback */
   left: 50%;
   transform: translateX(-50%);
-  background: black;
+  background: white;
   width: 90%;
   overflow-y: auto;
   overscroll-behavior: contain;
-  /* display: block; */
   display: flex;
   flex-direction: column;
   border-radius: 0.5rem;
@@ -81,7 +79,7 @@
   display: block;
   position: absolute;
   z-index: 9999;
-  background-color: black;
+  background-color: white;
   margin: 0;
   width: 100%;
 }
@@ -103,7 +101,7 @@ body #masthead ul#header-menu li.current_page_item.current-menu-item > a svg > p
 #header-menu ul.sub-menu,
 #header-menu ul.sub-menu ul.sub-menu {
   padding-left: 1rem;
-  box-shadow: none;
+  /* box-shadow: none; */
 }
 
 /* No transition color on hover. */
@@ -116,7 +114,6 @@ body #masthead ul#header-menu li.current_page_item.current-menu-item > a svg > p
   position: static;
   min-width: 2rem;
   min-height: 2rem;
-  /* margin: auto; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -209,7 +206,6 @@ ul#header-menu li a:hover {
     align-items: center;
     position: static;
     top: 3.4rem;
-    /* left: 35%; */
     width: 100%;
     background: transparent;
     visibility: visible;
@@ -236,21 +232,23 @@ ul#header-menu li a:hover {
   }  
 
   /* Add scaling on hover to main nav items on desktop. */
-  .site-title > a {
+  .site-title > a,
+  ul#header-menu li a,
+  .responsive-header-search-link {
     display: inline-block;
     transition: all 0.3s ease-in-out;
   }
   .site-title > a:hover,
-  ul#header-menu li a:hover {
+  ul#header-menu li a:hover,
+  .responsive-header-search-link:hover {
     transition: all 0.3s ease-in-out;
     transform: scale(1.1);
   }
 
-    /* Show submenu on hover. */
-    #header-menu li:hover > ul.sub-menu {
-      display: block;
-      /* position: absolute; */
-    }  
+  /* Show submenu on hover. */
+  #header-menu li:hover > ul.sub-menu {
+    display: block;
+  }  
 
   /* Add scaling on hover to nav items on desktop. */
   ul#header-menu li.menu-item-has-children ul.sub-menu li > a:hover {
