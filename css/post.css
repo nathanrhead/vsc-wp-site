@@ -1,0 +1,31 @@
+.post_other-posts {
+  margin: 2rem 0;
+}
+
+body.single.single-post #page .post_other-posts h2 {
+  margin: 0;
+  margin-bottom: 1rem;
+}
+
+.post_other-posts ul {
+  margin: 0;
+}
+
+body.single.single-post #page .post_other-posts ul li,
+body.single.single-post #page .post_other-posts ul li > div {
+  padding: 0;
+}
+
+.columns-3.wp-block-post-template {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+body.single.single-post #page .post_other-posts a.post-link > h2 {
+  color: #c76919
+}
+
+body.single.single-post #page .post_other-posts a.post-link > h2:hover {
+  color: #10659C;
+}

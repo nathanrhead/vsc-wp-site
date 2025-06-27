@@ -22,6 +22,8 @@ function responsive_child_enqueue_styles() {
 
   wp_enqueue_style('child-product-style', get_stylesheet_directory_uri() . '/css/product.css', ['child-style'], filemtime(get_stylesheet_directory() . '/css/product.css'));
 
+  wp_enqueue_style('child-post-style', get_stylesheet_directory_uri() . '/css/post.css', ['child-style'], filemtime(get_stylesheet_directory() . '/css/post.css'));
+
   wp_enqueue_style('child-responsive-style', get_stylesheet_directory_uri() . '/css/responsive.css', ['child-style'], filemtime(get_stylesheet_directory() . '/css/responsive.css'));
 }
 add_action('wp_enqueue_scripts', 'responsive_child_enqueue_styles');
@@ -146,7 +148,6 @@ function register_podcast_post_type() {
 }
 add_action('init', 'register_podcast_post_type');
 
-
 // Handler for both [book_buy_url] and [ebook_buy_url] pseudo-shortcodes.
 add_filter('render_block', function ($block_content, $block) {
   if (strpos($block_content, '[book_buy_url]') !== false || strpos($block_content, '[ebook_buy_url]') !== false) {
@@ -183,48 +184,49 @@ add_filter('render_block', function ($block_content, $block) {
   return $block_content;
 }, 12, 2);
 
-// Remove the "Read More" link from the excerpt block on custom post-type = book.
-add_filter( 'render_block', function ( $block_content, $block ) {
-  if ( $block['blockName'] === 'core/post-excerpt' && (strpos( $block_content, 'Read more' ) !== false || strpos( $block_content, 'Read More' ) !== false )
-  ) {
-    // Remove everything after ellipses (if present), preserving ellipses.
-    $block_content = preg_replace(
-      '/(\.\.\.|&hellip;).*$/iu',
-      '$1',
-      $block_content
-    );
+// // Remove the "Read More" link from the excerpt block on custom post-type = book.
+// add_filter( 'render_block', function ( $block_content, $block ) {
+//   if ( $block['blockName'] === 'core/post-excerpt' && (strpos( $block_content, 'Read more' ) !== false || strpos( $block_content, 'Read More' ) !== false )
+//   ) {
+//     // Remove everything after ellipses (if present), preserving ellipses.
+//     $block_content = preg_replace(
+//       '/(\.\.\.|&hellip;).*$/iu',
+//       '$1',
+//       $block_content
+//     );
 
-    // If no ellipses, remove Read more and everything after.
-    if (strpos($block_content, '...') === false && strpos($block_content, '&hellip;') === false) {
-      $block_content = preg_replace(
-        '/\s*Read\s*more.*?(»|›|&raquo;|&gt;|&rsaquo;)?\s*$/iu',
-        '',
-        $block_content
-      );
-    }
-  }
+//     // If no ellipses, remove Read more and everything after.
+//     if (strpos($block_content, '...') === false && strpos($block_content, '&hellip;') === false) {
+//       $block_content = preg_replace(
+//         '/\s*Read\s*more.*?(»|›|&raquo;|&gt;|&rsaquo;)?\s*$/iu',
+//         '',
+//         $block_content
+//       );
+//     }
+//   }
 
-  return $block_content;
-}, 10, 2);
+//   return $block_content;
+// }, 10, 2);
+
+// // Remove "Read more" and everything after it.
+// add_filter('get_the_excerpt', function( $excerpt ) {
+
+//   echo "the excerpt passed is:<br>";
+//   var_dump(  $excerpt );
+//   echo '<br>';
+
+//   $excerpt = preg_replace(
+//     '/\s*Read\s*more.*?(»|›|&raquo;|&gt;|&rsaquo;)?\s*$/iu',
+//     '',
+//     $excerpt
+//   );
+
+//   return $excerpt;
+// });
 
 // Exclude the book featured on a book custom post-type from Query Loop blocks. 
 add_filter( 'query_loop_block_query_vars', function ( $query_args, $block_context ) {
-  if (
-    !empty( $query_args['post_type'] ) &&
-    $query_args['post_type'] === 'book' &&
-    is_singular( 'book' )
-  ) {
-    $featured_id = get_the_ID();
-
-    // Ensure that it hasn't already been excluded.
-    if ( !in_array( $featured_id, $query_args['post__not_in'] ?? [], true ) ) {
-      $query_args['post__not_in'][] = $featured_id;
-    }
-  } elseif (
-    ! empty( $query_args['post_type'] ) &&
-    $query_args['post_type'] === 'video' &&
-    is_singular( 'video' )
-  ) {
+  if ( is_singular() ) {
     $featured_id = get_the_ID();
 
     // Ensure that it hasn't already been excluded.
@@ -311,7 +313,7 @@ add_filter( 'body_class', function( $classes ) {
 } );
 
 // Split blog-post content into two parts, the first to be rendered on page load, the second on user click.
-function truncate_html($html, $limit = 3000) {
+function truncate_html( $html, $limit = 3000 ) {
   if (mb_strlen(strip_tags($html)) <= $limit) {
     return [
       'truncated' => $html,
@@ -331,8 +333,6 @@ function truncate_html($html, $limit = 3000) {
   $limit_reached = false;
 
   foreach ($wrapper->childNodes as $node) {
-    if (!($node instanceof DOMElement)) continue;
-
     $node_html = $doc->saveHTML($node);
     $node_text = strip_tags($node_html);
     $len = mb_strlen($node_text);

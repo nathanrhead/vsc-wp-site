@@ -40,6 +40,9 @@ Responsive\responsive_entry_before();
         echo '<a href="#" class="read-more-toggle">Read the full article.</a>';
         echo '<div class="post-full-content" style="display: none;">' . apply_filters( 'the_content', $remainder ) . '</div>';
         echo '</div>';
+				
+				// Render other articles section here
+				get_template_part( 'partials/single/other-posts' );
 			} elseif ( 'featured_image' === $element && !post_password_required() ) { // Featured Image.
 				$format = $format ? $format : 'thumbnail';
 				get_template_part( 'partials/single/media/blog-single', $format );

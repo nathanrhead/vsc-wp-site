@@ -7,14 +7,28 @@
 */
 
 /* Set the content container on regular pages to a restricted width. */
-.not-custom-page-type {
-  width: 90%;
-  margin: auto;
-}
-.not-custom-page-type main {
+html body.not-custom-page-type #page main#primary {
   width: 100%;
   margin: auto;
 }
+
+/* Remove padding from the article tag on regular pages. */
+html body.not-custom-page-type #page main#primary article {
+  padding: 0;
+}
+
+/* Add padding to the image block on regular pages. */
+.not-custom-page-type #page .img-block {
+  padding: 3rem 0;
+}
+
+/* Adjust the height and add styling to the image on regular pages. */
+.not-custom-page-type #page .img-block img,
+article.post .thumbnail img {
+  height: auto;
+  border-radius: 10px;
+}
+
 
 /* Style the inputs of the contact form on the About page. */
 .about-page-form div.wpforms-container-full .wpforms-form button.wpforms-submit.resp-contact-form-button[type=submit] {
@@ -45,7 +59,7 @@
   background-color: #F7F7F7;
   display: flex;
   justify-content: center;
-  align-items: center;
+  /* align-items: center; */
   /* overflow: hidden; */
 }
 .wp-block-post-template .wp-block-post-featured-image img {
@@ -54,7 +68,7 @@
   height: auto;
   display: block;
   object-fit: contain !important;
-  padding: 1rem;
+  /* padding: 1rem; */
 }
 
 /* Remove position: relative from the featured image block: it causes the featured image to cover the mobile menu in Safari. */
@@ -94,9 +108,9 @@ html .res-transparent-header .site-content {
 }
 
 @media all and (width >= 1180px) {
-  .wp-block-post-template .wp-block-post-featured-image img {
+  /* .wp-block-post-template .wp-block-post-featured-image img {
     max-width: 90%;
-  }
+  } */
 
   body.single:not(.single-product).responsive-site-style-boxed #primary.content-area {
     width: 100%;
