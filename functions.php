@@ -25,6 +25,9 @@ function responsive_child_enqueue_styles() {
   wp_enqueue_style('child-post-style', get_stylesheet_directory_uri() . '/css/post.css', ['child-style'], filemtime(get_stylesheet_directory() . '/css/post.css'));
 
   wp_enqueue_style('child-responsive-style', get_stylesheet_directory_uri() . '/css/responsive.css', ['child-style'], filemtime(get_stylesheet_directory() . '/css/responsive.css'));
+
+  wp_enqueue_style('child-homepage-style', get_stylesheet_directory_uri() . '/css/homepage.css', ['child-style'], filemtime(get_stylesheet_directory() . '/css/homepage.css'));
+
 }
 add_action('wp_enqueue_scripts', 'responsive_child_enqueue_styles');
 
@@ -39,6 +42,18 @@ function responsive_child_enqueue_scripts() {
   );
 }
 add_action('wp_enqueue_scripts', 'responsive_child_enqueue_scripts');
+
+// Enqueue custom post-carousel assests.
+function enqueue_custom_post_carousel_editor_assets() {
+  wp_register_script(
+    'custom-post-carousel-wrapper-editor',
+    get_stylesheet_directory_uri() . '/blocks/custom-post-carousel-wrapper/index.js',
+    [ 'wp-blocks', 'wp-element', 'wp-editor', 'wp-components', 'wp-block-editor' ],
+    null,
+    true
+  );
+}
+add_action( 'enqueue_block_editor_assets', 'enqueue_custom_post_carousel_editor_assets' );
 
 // Register a custom post-type for books.
 function register_book_post_type() {
@@ -150,7 +165,7 @@ add_action('init', 'register_podcast_post_type');
 
 // Handler for both [book_buy_url] and [ebook_buy_url] pseudo-shortcodes.
 add_filter('render_block', function ($block_content, $block) {
-  if (strpos($block_content, '[book_buy_url]') !== false || strpos($block_content, '[ebook_buy_url]') !== false) {
+  if ( $block_content && ( strpos( $block_content, '[book_buy_url]' ) !== false || strpos( $block_content, '[ebook_buy_url]' ) !== false ) ) {
     $post_id = get_the_ID();
 
     $book_url = esc_url(get_post_meta($post_id, 'book_buy_url', true));
@@ -208,22 +223,6 @@ add_filter('render_block', function ($block_content, $block) {
 //   return $block_content;
 // }, 10, 2);
 
-// // Remove "Read more" and everything after it.
-// add_filter('get_the_excerpt', function( $excerpt ) {
-
-//   echo "the excerpt passed is:<br>";
-//   var_dump(  $excerpt );
-//   echo '<br>';
-
-//   $excerpt = preg_replace(
-//     '/\s*Read\s*more.*?(»|›|&raquo;|&gt;|&rsaquo;)?\s*$/iu',
-//     '',
-//     $excerpt
-//   );
-
-//   return $excerpt;
-// });
-
 // Exclude the book featured on a book custom post-type from Query Loop blocks. 
 add_filter( 'query_loop_block_query_vars', function ( $query_args, $block_context ) {
   if ( is_singular() ) {
@@ -272,6 +271,196 @@ add_filter( 'render_block', function( $block_content, $block ) {
 
   return $block_content;
 }, 10, 2 );
+
+// Register the custom post-carousel-wrapper dynamic block via block.json.
+function responsive_child_register_carousel_wrapper_block() {
+    register_block_type( get_stylesheet_directory() . '/blocks/custom-post-carousel-wrapper/block.json' );
+}
+add_action( 'init', 'responsive_child_register_carousel_wrapper_block' );
+
+// Patch the custom config of the wrapper into Responsive's Post Carousel block.
+function patch_responsive_carousel_block( $block_content, $block ) {
+  if ( $block['blockName'] !== 'custom/post-carousel-wrapper' ) {
+    return $block_content;
+  }
+
+  if ( empty( $block['innerBlocks'] ) ) {
+    return $block_content;
+  }
+
+  $inner_block = $block['innerBlocks'][0];
+
+  if ( $inner_block['blockName'] !== 'responsive-block-editor-addons/post-carousel' ) {
+    return $block_content;
+  }
+
+  // Pull wrapper attributes
+  $post_type = $block['attrs']['postType'] ?? 'post';
+  $include_categories = $block['attrs']['includeCategories'] ?? '';
+
+  // Coerce category values into arrays of term IDs
+  $include_array = array_filter(array_map(function($slug) {
+    $term = get_term_by('slug', trim($slug), 'category');
+    return $term ? $term->term_id : null;
+  }, explode(',', $include_categories)));
+
+  // Inject into inner block's attributes
+  $inner_block['attrs']['postType'] = $post_type;
+
+  if ( !empty( $include_array ) ) {
+    $inner_block['attrs']['categories'] = $include_array;
+  }
+
+  // Let Responsive handle its own query using updated attributes
+  return render_block( $inner_block );
+}
+add_filter( 'render_block', 'patch_responsive_carousel_block', 10, 2 );
+
+// Patch Responsive's carousel, replacing the default query and markup with a custom query and markup.
+add_action('init', function () {
+  $block_type = WP_Block_Type_Registry::get_instance()->get_registered('responsive-block-editor-addons/post-carousel');
+
+  if ($block_type && isset($block_type->render_callback)) {
+    $original_callback = $block_type->render_callback;
+
+    // Override the render_callback with our own.
+    $block_type->render_callback = function ($attributes, $content) use ($original_callback) {
+      $post_type = [];
+      if (!empty($attributes['postType'])) {
+        if (is_array($attributes['postType'])) {
+          $post_type = $attributes['postType'];
+        } else {
+          $post_type = array_map('trim', explode(',', $attributes['postType']));
+        }
+      }      
+      
+      $raw_categories = $attributes['categories'] ?? [];
+      $categories = is_array($raw_categories) ? $raw_categories : array_map('trim', explode(',', (string) $raw_categories));
+
+      $args = [
+        'post_type'      => $post_type,
+        'posts_per_page' => $attributes['postsToShow'] ?? 6,
+        'post_status'    => 'publish',
+        'order'          => $attributes['order'] ?? 'desc',
+        'orderby'        => $attributes['orderBy'] ?? 'date',
+        'offset'         => $attributes['offset'] ?? 0,
+      ];
+
+      if (!empty($categories)) {
+        $args['tax_query'] = [[
+          'taxonomy' => 'category',
+          'field'    => 'term_id',
+          'terms'    => $categories,
+        ]];
+      }
+
+      $query = new WP_Query($args);
+
+      ob_start();
+      ?>
+      <section class="responsive-block-editor-addons-block-post-carousel block-<?php echo esc_attr($attributes['block_id'] ?? ''); ?> responsive-post-grid responsive-post__image-position-top featuredpost align<?php echo esc_attr($attributes['align'] ?? 'center'); ?>" data-carouselid="<?php echo esc_attr($attributes['block_id'] ?? ''); ?>">
+        <div class="responsive-post-slick-carousel-<?php echo esc_attr($attributes['block_id'] ?? ''); ?> responsive-post_carousel-equal-height-<?php echo esc_attr($attributes['equalHeight'] ?? 1); ?> is-carousel columns-<?php echo esc_attr($attributes['columns'] ?? 3); ?>"
+          data-slick='<?php
+            $slick = [
+              "slidesToShow" => $attributes['columns'] ?? 3,
+              "slidesToScroll" => 1,
+              "autoplaySpeed" => $attributes['autoplaySpeed'] ?? 2000,
+              "autoplay" => !empty($attributes['autoplay']),
+              "infinite" => !empty($attributes['infiniteLoop']),
+              "pauseOnHover" => !empty($attributes['pauseOnHover']),
+              "speed" => $attributes['transitionSpeed'] ?? 500,
+              "arrows" => (isset($attributes['arrowDots']) && (strpos($attributes['arrowDots'], 'arrows') !== false)),
+              "dots" => (isset($attributes['arrowDots']) && (strpos($attributes['arrowDots'], 'dots') !== false)),
+              "rtl" => is_rtl(),
+              "responsive" => [
+                [
+                  "breakpoint" => 976,
+                  "settings" => [
+                    "slidesToShow" => $attributes['columnsTablet'] ?? 1,
+                    "slidesToScroll" => 1,
+                  ],
+                ],
+                [
+                  "breakpoint" => 767,
+                  "settings" => [
+                    "slidesToShow" => $attributes['columnsMobile'] ?? 1,
+                    "slidesToScroll" => 1,
+                  ],
+                ],
+              ],
+            ];
+            echo esc_attr(json_encode($slick));
+          ?>'>
+          <?php while ($query->have_posts()) : $query->the_post(); ?>
+            <article id="post-<?php the_ID(); ?>" <?php post_class('responsive-block-editor-addons-post-carousel-item'); ?>>
+              <div class="responsive-block-editor-addons-post-carousel-inner">
+                <?php if (empty($attributes['displayPostImage']) || $attributes['displayPostImage']): ?>
+                <div class="responsive-block-editor-addons-block-post-carousel-image-<?php echo esc_attr($attributes['imagePosition'] ?? 'top'); ?>">
+                  <a href="<?php the_permalink(); ?>" rel="bookmark" aria-hidden="true" tabindex="-1">
+                    <?php the_post_thumbnail($attributes['imageSize'] ?? 'full'); ?>
+                  </a>
+                </div>
+                <?php endif; ?>
+                <div class="responsive-block-editor-addons-block-post-carousel-text-wrap">
+                  <header class="responsive-block-editor-addons-block-post-carousel-header">
+                    <?php if (empty($attributes['displayPostTitle']) || $attributes['displayPostTitle']): ?>
+                      <<?php echo esc_html($attributes['postTitleTag'] ?? 'h3'); ?> class="carousel-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></<?php echo esc_html($attributes['postTitleTag'] ?? 'h3'); ?>>
+                    <?php endif; ?>
+                  </header>
+                  <?php if (empty($attributes['displayPostExcerpt']) || $attributes['displayPostExcerpt']): ?>
+                  <div class="responsive-block-editor-addons-block-post-carousel-excerpt">
+                    <?php
+                      $excerpt = get_the_excerpt();
+                      $excerpt = preg_replace('/<div class="read-more">.*?<\/div>/is', '', $excerpt);
+                      $excerpt = preg_replace('/<!–.*?–>/u', '', $excerpt);
+                      if (!empty($attributes['excerptLength']) && is_numeric($attributes['excerptLength'])) {
+                        $words = explode(' ', wp_strip_all_tags($excerpt));
+                        if (count($words) > $attributes['excerptLength']) {
+                          $excerpt = implode(' ', array_slice($words, 0, $attributes['excerptLength'])) . '&hellip;';
+                        }
+                      }
+                      echo $excerpt;
+                    ?>
+                  </div>
+                  <?php endif; ?>
+                  <?php if (!empty($attributes['displayPostDate'])): ?>
+                  <div class="responsive-block-editor-addons-block-post-carousel-date">
+                    <?php echo get_the_date(); ?>
+                  </div>
+                  <?php endif; ?>
+                  <?php if (!empty($attributes['displayPostAuthor'])): ?>
+                  <div class="responsive-block-editor-addons-block-post-carousel-author">
+                    <?php esc_html_e('By', 'responsive'); ?> <?php the_author(); ?>
+                  </div>
+                  <?php endif; ?>
+                  <?php if (!empty($attributes['displayPostTaxonomy'])): ?>
+                  <div class="responsive-block-editor-addons-block-post-carousel-taxonomy">
+                    <?php the_category(', '); ?>
+                  </div>
+                  <?php endif; ?>
+                  <?php if (!empty($attributes['displayPostComment'])): ?>
+                  <div class="responsive-block-editor-addons-block-post-carousel-comments">
+                    <?php comments_number(); ?>
+                  </div>
+                  <?php endif; ?>
+                  <?php if (!empty($attributes['displayPostLink'])): ?>
+                  <div class="responsive-block-editor-addons-block-post-carousel-read-more">
+                    <a href="<?php the_permalink(); ?>" class="carousel-read-more">
+                      <?php echo esc_html($attributes['readMoreText'] ?? 'Continue Reading'); ?>
+                    </a>
+                  </div>
+                  <?php endif; ?>
+                </div>
+              </div>
+            </article>
+          <?php endwhile; wp_reset_postdata(); ?>
+        </div>
+      </section>
+      <?php
+      return ob_get_clean();
+    };
+  }
+});
 
 // Register editor-visible book-price block using block.json metadata.
 function register_book_price_block_metadata() {
@@ -365,3 +554,12 @@ function truncate_html( $html, $limit = 3000 ) {
 // echo '<pre>';
 // print_r( get_theme_mods() );
 // echo '</pre>';
+
+// add_action('init', function () {
+//   $block = WP_Block_Type_Registry::get_instance()->get_registered('responsive-block-editor-addons/post-carousel');
+//   if ($block) {
+//     error_log('Registered Responsive Post Carousel Block: ' . print_r($block, true));
+//   } else {
+//     error_log('Responsive Post Carousel block not found.');
+//   }
+// });

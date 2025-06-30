@@ -1,0 +1,28 @@
+body.home #page .responsive-block-editor-addons-post-carousel-inner
+.responsive-block-editor-addons-block-post-carousel-image-top {
+  height: 300px;
+  overflow: hidden;
+}
+
+.responsive-block-editor-addons-post-carousel-inner
+.responsive-block-editor-addons-block-post-carousel-image-top img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 10px;
+}
+
+.responsive-block-editor-addons-post-carousel-item {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.home h3.carousel-title {
+  margin: 1rem 0;
+}
+
+body.home #page .responsive-block-editor-addons-block-post-carousel-text-wrap {
+  padding: 0;
+}

@@ -1,0 +1,31 @@
+{
+  "apiVersion": 2,
+  "name": "custom/post-carousel-wrapper",
+  "title": "Post Carousel Wrapper",
+  "category": "widgets",
+  "icon": "slides",
+  "description": "Wrapper for the Responsive Post Carousel with post type and category filters.",
+  "supports": {
+    "html": false
+  },
+  "attributes": {
+    "postType": {
+      "type": "string",
+      "default": "post"
+    },
+    "includeCategories": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "excludeCategories": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "editorScript": "custom-post-carousel-wrapper-editor",
+  "render": "file:./render.php"
+}
