@@ -41,7 +41,6 @@ if ( $books_page ) {
   if ( ! $banner_header_text ) $banner_header_text = 'Books';
   if ( !$banner_subheader_text ) $banner_subheader_text = '';
   $banner_text_color = get_post_meta( $books_page->ID, 'banner-text-color',  true );
-  $nav_text_color = get_post_meta( $books_page->ID, 'nav-text-color',  true );
 }
 ?>
 <!doctype html>
@@ -54,6 +53,10 @@ if ( $books_page ) {
 	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>"/>
 	<?php wp_head(); ?>
   <style>
+    .site-title > a {
+      color: <?php echo esc_html( $banner_text_color ); ?>
+    }
+
     /* Add padding to the header for mobile */
     .site-header {
       padding: 0 1rem;
@@ -84,15 +87,6 @@ if ( $books_page ) {
     .main-navigation.toggled .main-navigation-wrapper .menu-toggle {
       background-color: transparent;
       color: white;
-    }
-
-    /* Use the custom fields for the banner's text colors. */
-    .site-title a,
-    #masthead ul#header-menu li a,
-    #masthead ul#header-menu li a svg path,
-    .res-search-icon svg {
-      color: <?php echo esc_attr( $nav_text_color ? $nav_text_color : '#fff' ); ?>;
-      stroke: <?php echo esc_attr( $nav_text_color ? $nav_text_color : '#fff' ); ?>;
     }
 
     /* Set the background color of the search form. */

@@ -41,7 +41,6 @@ if ( $videos_page ) {
   if ( ! $banner_header_text ) $banner_header_text = 'Videos';
   if ( ! $banner_subheader_text ) $banner_subheader_text = '';
   $banner_text_color = get_post_meta( $videos_page->ID, 'banner-text-color',  true );
-  $nav_text_color = get_post_meta( $videos_page->ID, 'nav-text-color',  true );
 }
 ?>
 <!doctype html>
@@ -54,6 +53,9 @@ if ( $videos_page ) {
 	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>"/>
 	<?php wp_head(); ?>
   <style>
+    .site-title > a {
+      color: <?php echo esc_html( $banner_text_color ); ?>
+    }
     .site-header {
       padding: 0 1rem;
     }
@@ -85,14 +87,7 @@ if ( $videos_page ) {
       color: white;
     }
 
-    /* Use the custom fields for the banner's text colors. */
-    .site-title a,
-    #masthead ul#header-menu li a,
-    #masthead ul#header-menu li a svg path,
-    .res-search-icon svg {
-      color: <?php echo esc_attr( $nav_text_color ? $nav_text_color : '#fff' ); ?>;
-      stroke: <?php echo esc_attr( $nav_text_color ? $nav_text_color : '#fff' ); ?>;
-    }
+    /* Style the search bar */
     body.page-template-vidoes #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .search-type-responsive-slide.search-active .search-form .res-search-wrapper {
       position: relative;
       background-color: white;
@@ -106,14 +101,13 @@ if ( $videos_page ) {
     body.page-template-vidoes #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .search-type-responsive-slide.search-active .search-form .res-search-wrapper button.search-submit svg path {
       fill: black;
     }
-    
   </style>
 </head>
 
-  <?php
-    // Get the featured image of the current page (the Videos page).
-    $header_bg_url = has_post_thumbnail() ? get_the_post_thumbnail_url( get_the_ID(), 'full' ) : '';
-  ?>
+<?php
+  // Get the featured image of the current page (the Videos page).
+  $header_bg_url = has_post_thumbnail() ? get_the_post_thumbnail_url( get_the_ID(), 'full' ) : '';
+?>
 <body 
   <?php body_class( 'videos-header-page' ); ?> 
   <?php responsive_schema_markup( 'body' ); ?> >
@@ -126,9 +120,9 @@ if ( $videos_page ) {
     <?php if ( $header_bg_url ) : ?>
       <div id="header-image-wrapper">
         <img 
-        class="header-bg" 
-        src="<?php echo esc_url( $header_bg_url ); ?>" 
-        alt="<?php echo esc_attr( get_the_title() ); ?>"
+          class="header-bg" 
+          src="<?php echo esc_url( $header_bg_url ); ?>" 
+          alt="<?php echo esc_attr( get_the_title() ); ?>"
         >
         <div class="header-image-overlay">
           <div class="products-page__header-text-container">
@@ -161,7 +155,6 @@ if ( $videos_page ) {
 
         // Replaces default header with custom header.
         // We want to still call the original responsive_custom_header().
-        // You could override this if needed with your own function.
         Responsive\responsive_custom_header();
 
         if ( ! has_action( 'responsive_custom_header' ) ) {
