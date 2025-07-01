@@ -57,6 +57,7 @@
     max-height: calc(100dvh - 5rem);
   }
 }
+
 /* Show the mobile menu when clicked. */
 .main-navigation.toggled #header-menu {
   opacity: 1;
@@ -238,11 +239,18 @@ ul#header-menu li a:hover {
     display: inline-block;
     transition: all 0.3s ease-in-out;
   }
-  .site-title > a:hover,
+  body #page .site-title > a:hover,
   ul#header-menu li a:hover,
   .responsive-header-search-link:hover {
     transition: all 0.3s ease-in-out;
     transform: scale(1.1);
+  }
+
+  body.page-template-books .site-title > a:hover,
+  body.page-template-videos .site-title > a:hover,
+  body.page-template-blogs .site-title > a:hover,
+  body.page-template-podcasts .site-title > a:hover {
+    color: white;
   }
 
   /* Show submenu on hover. */

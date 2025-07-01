@@ -1,11 +1,5 @@
 /* === Style the products' custom post-types. === */
 
-/* For the products template, override Responsive's width restriction on main. */
-/* html body .page.page-template-books #primary.content-area,
-html body .page.page-template-videos #primary.content-area {
-  width: 100%;
-} */
-
 /* Expand the header from edge to edge. */
 .page-template-books.books-header-page .site.hfeed,
 .page-template-videos.videos-header-page .site.hfeed,
@@ -13,30 +7,6 @@ html body .page.page-template-videos #primary.content-area {
 .page-template-blogs.blogs-header-page .site.hfeed {
   max-width: 100%;
 }
-
-/* Make the header logo white. */
-/* body.page-template-books #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-left .site-title a,
-body.page-template-videos #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-left .site-title a,
-body.page-template-podcasts #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-left .site-title a,
-body.page-template-blogs #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-left .site-title a {
-  color: white;
-} */
-
-/* Make the main navigation background color transparent. */
-/* body.page-template-books #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .main-navigation-wrapper,
-body.page-template-videos #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .main-navigation-wrapper {
-  background-color: transparent;
-} */
-
-/* Make the main navigation links white and background transparent. */
-/* body.page-template-books #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .main-navigation-wrapper ul li a,
-body.page-template-books #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .main-navigation-wrapper ul li a svg,
-body.page-template-videos #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .main-navigation-wrapper ul li a,
-body.page-template-videos #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .main-navigation-wrapper ul li a svg {
-  color: white;
-  background-color: transparent;
-  stroke: white;
-} */
 
 /* Make the submenu's background black. */
 body.page-template-books #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .main-navigation-wrapper ul ul,
@@ -183,11 +153,6 @@ body.single-video .wp-block-columns .wp-block-column:first-child figure.wp-block
 figure.wp-block-post-featured-image a {
   height: auto;
 }
-/* Reset the other list's images to have a full width. */
-.products-page__other-list .wp-block-post-template .wp-block-post-featured-image img {
-  max-width: 100%;
-  max-height: 300px;
-}
 /* Style the list of products on the product's main page. */
 .products-page__other-list p {
   margin-bottom: 2rem;
@@ -204,7 +169,6 @@ figure.wp-block-post-featured-image a {
 .products-page__other-list ul li .wp-block-group .wp-block-group__inner-container {
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
   justify-content: center;
 }
 /* Stack the other list's buy buttons. */
@@ -272,12 +236,6 @@ figure.wp-block-post-featured-image a {
     width: 90% !important;
   }
   
-  /* Format the lists in a row for desktop. */
-  #page .page_featured-list .wp-block-columns,
-  .products-page__other-list ul li > div {
-    flex-direction: row;
-  }
-
   .products-page__other-list ul li .wp-block-group .wp-block-group__inner-container {
     align-items: flex-start;
   }
@@ -317,7 +275,7 @@ figure.wp-block-post-featured-image a {
   }
 
   .page_featured-list .wp-block-column:nth-of-type(2) li figure {
-    height: auto;
+    /* height: auto; */
     margin-bottom: 1rem;
   }
 
@@ -328,7 +286,6 @@ figure.wp-block-post-featured-image a {
 
   /* Center the featured products' details. */
   #page .page_featured-list .wp-block-columns li {
-    /* padding: 0; */
     align-items: flex-start;
   }
 
@@ -349,6 +306,10 @@ figure.wp-block-post-featured-image a {
     padding: 2rem;
   }
 
+  /* Format the others list in a row for desktop. */
+  .products-page__other-list ul li > div {
+    flex-direction: row;
+  }
   /* Alternate the order of a product's details on the product's main page. */
   .products-page__other-list > .wp-block-query > .wp-block-post-template li:nth-child(even) .wp-block-group.is-layout-flex {
     flex-direction: row-reverse;
@@ -365,9 +326,19 @@ figure.wp-block-post-featured-image a {
   }
 }
 
-@media all and (width >= 1180px) {
+@media all and (width >= 1280px) {
+  /* Set the direction of the featured list to row. */
+  #page .page_featured-list .wp-block-columns {
+    flex-direction: row;
+  }
+
+  /* Restrict the height of the featured image's container. */
+  .wp-block-post-template .wp-block-post-featured-image {  
+    height: 200px;
+  }
+  
   /* Add the description from the featured product's second column on the books page. */
   .page-template-books .page_featured-list .wp-block-column:nth-of-type(2) li .wp-block-post-excerpt {
     display: flex;
-  }  
+  }
 }

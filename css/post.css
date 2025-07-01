@@ -16,6 +16,16 @@ body.single.single-post #page .post_other-posts ul li > div {
   padding: 0;
 }
 
+body.single.single-post #page .post_other-posts ul li figure {
+  height: 200px;
+}
+
+body.single.single-post #page .post_other-posts ul li figure,
+body.single.single-post #page .post_other-posts ul li figure img {
+  padding: 0;
+  border-radius: 10px;
+}
+
 .columns-3.wp-block-post-template {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

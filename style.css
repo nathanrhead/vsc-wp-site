@@ -10,6 +10,7 @@
 html body.not-custom-page-type #page main#primary {
   width: 100%;
   margin: auto;
+  padding: 0;
 }
 
 /* Remove padding from the article tag on regular pages. */
@@ -29,6 +30,10 @@ article.post .thumbnail img {
   border-radius: 10px;
 }
 
+/* Set the line height for post excerpts. */
+.wp-block-post-excerpt__excerpt {
+  line-height: 1.5rem;
+}
 
 /* Style the inputs of the contact form on the About page. */
 .about-page-form div.wpforms-container-full .wpforms-form button.wpforms-submit.resp-contact-form-button[type=submit] {
@@ -55,7 +60,7 @@ article.post .thumbnail img {
 /* Style the images rendered in the query loop. */
 .wp-block-post-template .wp-block-post-featured-image {
   width: 100%;
-  height: 300px;
+  height: 100%;
   background-color: #F7F7F7;
   display: flex;
   justify-content: center;
@@ -63,12 +68,12 @@ article.post .thumbnail img {
   /* overflow: hidden; */
 }
 .wp-block-post-template .wp-block-post-featured-image img {
-  max-width: 100%;
-  width: auto;
-  height: auto;
+  /* max-width: 100%; */
+  width: 100%;
+  height: 100%;
   display: block;
-  object-fit: contain !important;
-  /* padding: 1rem; */
+  object-fit: cover;
+  padding: 1rem;
 }
 
 /* Remove position: relative from the featured image block: it causes the featured image to cover the mobile menu in Safari. */
@@ -107,16 +112,15 @@ html .res-transparent-header .site-content {
   visibility: hidden;
 }
 
-@media all and (width >= 1180px) {
-  /* .wp-block-post-template .wp-block-post-featured-image img {
-    max-width: 90%;
-  } */
-
+@media all and (width >= 1280px) {
   body.single:not(.single-product).responsive-site-style-boxed #primary.content-area {
     width: 100%;
     padding: 0;
   }
   body.single:not(.single-product).responsive-site-style-boxed #primary.content-area > article {
     padding: 0;
+  }
+  .wp-block-post-template .wp-block-post-featured-image {
+    height: 200px;
   }
 }
