@@ -45,12 +45,14 @@
         'tax_query'      => $tax_query,
       ]);
 
-      // Strip unwanted injected HTML like the read-more div
-      $raw_excerpt = get_the_excerpt();
-      $excerpt_cleaned = preg_replace('/<div class="read-more">.*?<\/div>/si', '', $raw_excerpt);
-
       if ( $query->have_posts() ) :
-        while ( $query->have_posts() ) : $query->the_post(); ?>
+        while ( $query->have_posts() ) : $query->the_post(); 
+      
+        // Strip unwanted injected HTML like the read-more div
+        $raw_excerpt = get_the_excerpt();
+        $excerpt_cleaned = preg_replace('/<div class="read-more">.*?<\/div>/si', '', $raw_excerpt);
+
+      ?>
           <li <?php post_class(); ?>>
             <div class="wp-block-group">
               <div class="wp-block-group__inner-container is-layout-flow wp-block-group-is-layout-flow">
