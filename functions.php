@@ -199,31 +199,31 @@ add_filter('render_block', function ($block_content, $block) {
   return $block_content;
 }, 12, 2);
 
-// // Remove the "Read More" link from the excerpt block on custom post-type = book.
-// add_filter( 'render_block', function ( $block_content, $block ) {
-//   if ( $block['blockName'] === 'core/post-excerpt' && (strpos( $block_content, 'Read more' ) !== false || strpos( $block_content, 'Read More' ) !== false )
-//   ) {
-//     // Remove everything after ellipses (if present), preserving ellipses.
-//     $block_content = preg_replace(
-//       '/(\.\.\.|&hellip;).*$/iu',
-//       '$1',
-//       $block_content
-//     );
+// Remove the "Read More" link from the excerpt block.
+add_filter( 'render_block', function ( $block_content, $block ) {
+  if ( $block['blockName'] === 'core/post-excerpt' && (strpos( $block_content, 'Read more' ) !== false || strpos( $block_content, 'Read More' ) !== false )
+  ) {
+    // Remove everything after ellipses (if present), preserving ellipses.
+    $block_content = preg_replace(
+      '/(\.\.\.|&hellip;).*$/iu',
+      '$1',
+      $block_content
+    );
 
-//     // If no ellipses, remove Read more and everything after.
-//     if (strpos($block_content, '...') === false && strpos($block_content, '&hellip;') === false) {
-//       $block_content = preg_replace(
-//         '/\s*Read\s*more.*?(»|›|&raquo;|&gt;|&rsaquo;)?\s*$/iu',
-//         '',
-//         $block_content
-//       );
-//     }
-//   }
+    // If no ellipses, remove Read more and everything after.
+    if (strpos($block_content, '...') === false && strpos($block_content, '&hellip;') === false) {
+      $block_content = preg_replace(
+        '/\s*Read\s*more.*?(»|›|&raquo;|&gt;|&rsaquo;)?\s*$/iu',
+        '',
+        $block_content
+      );
+    }
+  }
 
-//   return $block_content;
-// }, 10, 2);
+  return $block_content;
+}, 10, 2);
 
-// Exclude the book featured on a book custom post-type from Query Loop blocks. 
+// Exclude the post featured on a custom post-type from Query Loop blocks. 
 add_filter( 'query_loop_block_query_vars', function ( $query_args, $block_context ) {
   if ( is_singular() ) {
     $featured_id = get_the_ID();
@@ -237,11 +237,10 @@ add_filter( 'query_loop_block_query_vars', function ( $query_args, $block_contex
   return $query_args;
 }, 10, 2 );
 
-// Add the book-detail page's link to the image of the query loop.
+// Add the post's link to the featured image and post title in the query loop.
 add_filter( 'render_block', function( $block_content, $block ) {  
   if ( 
     $block['blockName'] === 'core/post-featured-image' 
-    // && is_singular( 'book' ) === true 
   ) {
     // Get the current post ID being rendered.
     $post_id = isset( $block['attrs']['postId'] ) ? $block['attrs']['postId'] : get_the_ID();
@@ -253,7 +252,7 @@ add_filter( 'render_block', function( $block_content, $block ) {
     }
 
     if ( $post_id ) {
-      // Skip wrapping if we're inside a Query Loop on a single post view of that same post
+      // Skip wrapping if we're inside a Query Loop on a single post view of that same post.
       if ( is_singular() && get_queried_object_id() === $post_id ) {
         return $block_content;
       } else {
@@ -262,6 +261,29 @@ add_filter( 'render_block', function( $block_content, $block ) {
         // Wrap the existing image content with a link.
         $block_content = preg_replace(
           '/(<figure.*?>)(.*?)(<\/figure>)/is',
+          '$1<a href="' . esc_url( $permalink ) . '">$2</a>$3',
+          $block_content
+        );
+      }
+    }
+  }
+  // Also wrap the post title in a link in the Query Loop, but not on single post view.
+  elseif ( $block['blockName'] === 'core/post-title' ) {
+    $post_id = isset( $block['attrs']['postId'] ) ? $block['attrs']['postId'] : get_the_ID();
+
+    if ( !$post_id ) {
+      global $post;
+      $post_id = $post ? $post->ID : null;
+    }
+
+    if ( $post_id ) {
+      // Avoid wrapping if this is the single post view of the same post.
+      if ( is_singular() && get_queried_object_id() === $post_id ) {
+        return $block_content;
+      } else {
+        $permalink = get_permalink( $post_id );
+        $block_content = preg_replace(
+          '/(<h[1-6][^>]*class="[^"]*wp-block-post-title[^"]*"[^>]*>)(.*?)(<\/h[1-6]>)/is',
           '$1<a href="' . esc_url( $permalink ) . '">$2</a>$3',
           $block_content
         );
@@ -316,7 +338,7 @@ function patch_responsive_carousel_block( $block_content, $block ) {
 }
 add_filter( 'render_block', 'patch_responsive_carousel_block', 10, 2 );
 
-// Patch Responsive's carousel, replacing the default query and markup with a custom query and markup.
+// Patch Responsive's post carousel, replacing the default query and markup with a custom query and markup.
 add_action('init', function () {
   $block_type = WP_Block_Type_Registry::get_instance()->get_registered('responsive-block-editor-addons/post-carousel');
 
@@ -404,23 +426,27 @@ add_action('init', function () {
                 <div class="responsive-block-editor-addons-block-post-carousel-text-wrap">
                   <header class="responsive-block-editor-addons-block-post-carousel-header">
                     <?php if (empty($attributes['displayPostTitle']) || $attributes['displayPostTitle']): ?>
-                      <<?php echo esc_html($attributes['postTitleTag'] ?? 'h3'); ?> class="carousel-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></<?php echo esc_html($attributes['postTitleTag'] ?? 'h3'); ?>>
+                      <a href="<?php the_permalink(); ?>" rel="bookmark" aria-hidden="true" tabindex="-1">
+                        <<?php echo esc_html($attributes['postTitleTag'] ?? 'h3'); ?> class="carousel-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></<?php echo esc_html($attributes['postTitleTag'] ?? 'h3'); ?>>
+                      </a>
                     <?php endif; ?>
                   </header>
                   <?php if (empty($attributes['displayPostExcerpt']) || $attributes['displayPostExcerpt']): ?>
                   <div class="responsive-block-editor-addons-block-post-carousel-excerpt">
-                    <?php
-                      $excerpt = get_the_excerpt();
-                      $excerpt = preg_replace('/<div class="read-more">.*?<\/div>/is', '', $excerpt);
-                      $excerpt = preg_replace('/<!–.*?–>/u', '', $excerpt);
-                      if (!empty($attributes['excerptLength']) && is_numeric($attributes['excerptLength'])) {
-                        $words = explode(' ', wp_strip_all_tags($excerpt));
-                        if (count($words) > $attributes['excerptLength']) {
-                          $excerpt = implode(' ', array_slice($words, 0, $attributes['excerptLength'])) . '&hellip;';
+                    <p class="wp-block-post-excerpt__excerpt">
+                      <?php
+                        $excerpt = get_the_excerpt();
+                        $excerpt = preg_replace('/<div class="read-more">.*?<\/div>/is', '', $excerpt);
+                        $excerpt = preg_replace('/<!–.*?–>/u', '', $excerpt);
+                        if (!empty($attributes['excerptLength']) && is_numeric($attributes['excerptLength'])) {
+                          $words = explode(' ', wp_strip_all_tags($excerpt));
+                          if (count($words) > $attributes['excerptLength']) {
+                            $excerpt = implode(' ', array_slice($words, 0, $attributes['excerptLength'])) . '&hellip;';
+                          }
                         }
-                      }
-                      echo $excerpt;
-                    ?>
+                        echo $excerpt;
+                      ?>
+                    </p>
                   </div>
                   <?php endif; ?>
                   <?php if (!empty($attributes['displayPostDate'])): ?>
