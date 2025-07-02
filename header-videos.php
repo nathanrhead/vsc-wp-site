@@ -53,9 +53,13 @@ if ( $videos_page ) {
 	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>"/>
 	<?php wp_head(); ?>
   <style>
-    .site-title > a {
-      color: <?php echo esc_html( $banner_text_color ); ?>
+    .site-title > a,
+    #header-menu li a,
+    #header-menu li a span svg path {
+      color: <?php echo esc_html( $banner_text_color ); ?>;
+      stroke: <?php echo esc_html( $banner_text_color ); ?>;
     }
+    
     .site-header {
       padding: 0 1rem;
     }

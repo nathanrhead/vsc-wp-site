@@ -11,7 +11,7 @@
 .site-header,
 #header-image-wrapper {
   position: relative;
-  z-index: 0;
+  z-index: 2;
 }
 
 /* Ensure that the wrapper takes height of image; needed for overlay to cover image. */

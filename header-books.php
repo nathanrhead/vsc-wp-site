@@ -53,8 +53,11 @@ if ( $books_page ) {
 	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>"/>
 	<?php wp_head(); ?>
   <style>
-    .site-title > a {
-      color: <?php echo esc_html( $banner_text_color ); ?>
+    .site-title > a,
+    #header-menu li a,
+    #header-menu li a span svg path {
+      color: <?php echo esc_html( $banner_text_color ); ?>;
+      stroke: <?php echo esc_html( $banner_text_color ); ?>;
     }
 
     /* Add padding to the header for mobile */

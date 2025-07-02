@@ -119,7 +119,7 @@ body.single-video .wp-block-columns .wp-block-column:first-child figure.wp-block
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* justify-content: center; */
 }
 
 /* Make the right column's UL grow to full height. */

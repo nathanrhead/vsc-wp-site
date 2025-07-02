@@ -123,4 +123,8 @@ html .res-transparent-header .site-content {
   .wp-block-post-template .wp-block-post-featured-image {
     height: 200px;
   }
+
+  .wp-block-post-template .wp-block-post-featured-image img {
+    padding: 1rem 0;
+  }
 }
