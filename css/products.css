@@ -181,6 +181,10 @@ figure.wp-block-post-featured-image a {
   width: 15rem;
 }
 
+.header-bg {
+  max-height: 500px;
+}
+
 /* === Media Queries === */
 @media all and (width >= 640px) {
   /* Make the banner text visible. */
