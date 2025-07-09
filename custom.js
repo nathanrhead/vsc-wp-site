@@ -87,11 +87,17 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-// Remove the "focus" class before the link triggers page load, so that the submenu isn't rendered when the page link is clicked.
+// Prevent submenu from flashing on touch-nav when a parent link is tapped.
 document.querySelectorAll('.menu-item-has-children > a').forEach(link => {
   link.addEventListener('click', e => {
-    const parent = link.closest('.menu-item-has-children');
-    parent.classList.remove('focus');
+    if (document.body.classList.contains('touch-nav')) {
+      const parent = link.closest('.menu-item-has-children');
+      if (parent) {
+        parent.classList.remove('focus');
+        const submenu = parent.querySelector(':scope > ul.sub-menu');
+        if (submenu) submenu.style.display = 'none';
+      }
+    }
   });
 });
 
@@ -205,7 +211,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-// Add classes to the body tag to toggle hover and click nav on and off.
+// Add classes to the body tag to toggle hover- and click-nav on and off.
 function updateNavMode() {
   if (window.innerWidth >= 1367) {
     document.body.classList.add('hover-nav');
