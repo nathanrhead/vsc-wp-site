@@ -150,7 +150,7 @@ function register_podcast_post_type() {
     'labels'             => $labels,
     'public'             => true,
     'has_archive'        => true,
-    'rewrite'            => array('slug' => 'video'),
+    'rewrite'            => array('slug' => 'podcast'),
     'show_in_rest'       => true, // Enable Gutenberg and REST API
     'supports'           => array('title', 'editor', 'excerpt', 'thumbnail', 'custom-fields', 'comments'),
     'menu_position'      => 6,
