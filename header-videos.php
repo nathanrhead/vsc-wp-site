@@ -53,6 +53,16 @@ if ( $videos_page ) {
 	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>"/>
 	<?php wp_head(); ?>
   <style>
+    #header-menu {
+      background-color: black;
+    }
+
+    #header-menu ul.sub-menu {
+      box-shadow: none;
+      border-top: 1px solid gray;
+      border-bottom: 1px solid gray;
+    }
+
     .site-title > a,
     #header-menu li a,
     #header-menu li a span svg path {
