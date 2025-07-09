@@ -130,6 +130,6 @@ body.single-video .wp-block-columns .wp-block-column:first-child figure.wp-block
 
 @media all and (width >= 1280px) {
   .single figure {
-    padding: 1rem 0;
+    padding: 1rem 1rem;
   }  
 }

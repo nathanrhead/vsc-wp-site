@@ -53,19 +53,7 @@ if ( $videos_page ) {
 	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>"/>
 	<?php wp_head(); ?>
   <style>
-    #header-menu {
-      background-color: black;
-    }
-
-    #header-menu ul.sub-menu {
-      box-shadow: none;
-      border-top: 1px solid gray;
-      border-bottom: 1px solid gray;
-    }
-
-    .site-title > a,
-    #header-menu li a,
-    #header-menu li a span svg path {
+    .site-title > a {
       color: <?php echo esc_html( $banner_text_color ); ?>;
       stroke: <?php echo esc_html( $banner_text_color ); ?>;
     }
@@ -114,6 +102,14 @@ if ( $videos_page ) {
     }
     body.page-template-vidoes #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .search-type-responsive-slide.search-active .search-form .res-search-wrapper button.search-submit svg path {
       fill: black;
+    }
+
+    @media all and (width >= 1024px) {
+      #header-menu li a,
+      #header-menu li a span svg path {
+        color: <?php echo esc_html( $banner_text_color ); ?>;
+        stroke: <?php echo esc_html( $banner_text_color ); ?>;
+      }
     }
   </style>
 </head>

@@ -32,10 +32,10 @@
 }
 
 /* Change the mobile menu from a push-style to a modal. */
-#header-menu {
+/* #header-menu {
   position: fixed;
   top: 8rem;
-  max-height: calc(100vh - 5rem); /* fallback */
+  max-height: calc(100vh - 5rem);
   left: 50%;
   transform: translateX(-50%);
   background: white;
@@ -56,15 +56,15 @@
   #header-menu {
     max-height: calc(100dvh - 5rem);
   }
-}
+} */
 
 /* Show the mobile menu when clicked. */
-.main-navigation.toggled #header-menu {
+/* .main-navigation.toggled #header-menu {
   opacity: 1;
   visibility: visible;
-}
+} */
 /* Settings for the top-level sub-menu. */
-#header-menu > ul {
+/* #header-menu > ul {
   display: block;
   padding: 0;
   margin: 0;
@@ -83,7 +83,7 @@
   background-color: white;
   margin: 0;
   width: 100%;
-}
+} */
 /* Style the currently active nav link. */
 body #masthead ul#header-menu li.current_page_item.current-menu-item > a,
 body #masthead ul#header-menu li.current_page_item.current-menu-item > a svg > path {
@@ -91,19 +91,18 @@ body #masthead ul#header-menu li.current_page_item.current-menu-item > a svg > p
   text-decoration: underline;
 }
 /* Set the mobile menu's nav link color. */
-#header-menu li a {
+/* #header-menu li a {
   color: black;
 }
 #header-menu li a span svg path {
   stroke: black;
-}
+} */
 
 /* Add left indent to sub-menus. */
-#header-menu ul.sub-menu,
+/* #header-menu ul.sub-menu,
 #header-menu ul.sub-menu ul.sub-menu {
   padding-left: 1rem;
-  /* box-shadow: none; */
-}
+} */
 
 /* No transition color on hover. */
 #header-menu li > a:hover {
@@ -111,7 +110,7 @@ body #masthead ul#header-menu li.current_page_item.current-menu-item > a svg > p
 }
 
 /* Fix the placement of the sub-menu caret. */
-#header-menu .res-iconify {
+/* #header-menu .res-iconify {
   position: static;
   min-width: 2rem;
   min-height: 2rem;
@@ -126,12 +125,12 @@ body #masthead ul#header-menu li.current_page_item.current-menu-item > a svg > p
 }
 #header-menu .res-iconify-outer {
   display: none;
-}
+} */
 
 /* No hover effect on the mobile menu. */
-ul#header-menu li a:hover {
+/* ul#header-menu li a:hover {
   transform: none;
-}
+} */
 
 /* Remove the border around the search feature's spy-glass icon and add a white background. */
 .res-search-icon .responsive-header-search-icon-wrap {
@@ -168,30 +167,30 @@ ul#header-menu li a:hover {
   }
 
   /* Add left padding to the submenu carets icon. */
-  #header-menu .res-iconify {
+  /* #header-menu .res-iconify {
     padding-left: .5rem;
-  }
+  } */
 
   /* Show the hamburger menu icon. */
-  #masthead .main-navigation .menu-toggle {
+  /* #masthead .main-navigation .menu-toggle {
     display: flex;
     border: none;
-  }
+  } */
   
   /* Ensure list items are positioned relative for submenu stacking context. */
-  #header-menu li {
+  /* #header-menu li {
     position: relative;
-  }
+  } */
 
   /* Ensure sub-submenus are positioned correctly. */
-  #header-menu ul.sub-menu li {
+  /* #header-menu ul.sub-menu li {
     display: block;
-  }
+  } */
 
   /* Style the sub-menu links. */
-  #header-menu ul.sub-menu li a:hover {
+  /* #header-menu ul.sub-menu li a:hover {
     background-color: transparent;
-  }
+  } */
 }
 
 @media all and (width >= 1024px) {
@@ -200,6 +199,16 @@ ul#header-menu li a:hover {
     display: none;
   }
   
+  /* Hide the home link. */
+  #header-menu li#menu-item-3181 {
+    display: none;
+  }
+
+  /* Line the inner submenu caret up with the submenu text. */
+  #header-menu .res-iconify-inner {
+    display: inline-block;
+  }
+
   /* Desktop menu container */
   #header-menu {
     display: flex;

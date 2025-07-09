@@ -9,12 +9,12 @@
 }
 
 /* Make the submenu's background black. */
-body.page-template-books #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .main-navigation-wrapper ul ul,
+/* body.page-template-books #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .main-navigation-wrapper ul ul,
 body.page-template-videos #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .main-navigation-wrapper ul ul,
 body.page-template-podcasts #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .main-navigation-wrapper ul ul,
 body.page-template-blogs #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .main-navigation-wrapper ul ul {
   background-color: black;
-}
+} */
 
 /* Make the search icon background transparent and the icon white. */
 body.page-template-books #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .res-search-icon > div,
@@ -338,7 +338,7 @@ figure.wp-block-post-featured-image a {
 
   /* Restrict the height of the featured image's container. */
   .wp-block-post-template .wp-block-post-featured-image {  
-    height: 200px;
+    height: 250px;
   }
   
   /* Add the description from the featured product's second column on the books page. */

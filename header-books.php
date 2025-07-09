@@ -53,21 +53,8 @@ if ( $books_page ) {
 	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>"/>
 	<?php wp_head(); ?>
   <style>
-     #header-menu {
-      background-color: black;
-    }
-    
-    #header-menu ul.sub-menu {
-      box-shadow: none;
-      border-top: 1px solid gray;
-      border-bottom: 1px solid gray;
-    }
-
-    .site-title > a,
-    #header-menu li a,
-    #header-menu li a span svg path {
+    .site-title > a {
       color: <?php echo esc_html( $banner_text_color ); ?>;
-      stroke: <?php echo esc_html( $banner_text_color ); ?>;
     }
 
     /* Add padding to the header for mobile */
@@ -95,7 +82,7 @@ if ( $books_page ) {
       object-fit: cover;
     }
 
-    /* Clear the background color of the hamburger menu on mobile. */
+    /* Clear the background color of the hamburger menu icon on mobile. */
     .main-navigation .main-navigation-wrapper .menu-toggle,
     .main-navigation.toggled .main-navigation-wrapper .menu-toggle {
       background-color: transparent;
@@ -119,6 +106,14 @@ if ( $books_page ) {
     /* Set the color of the search icon in the submit form. */
     body.page-template-books #page #header-image-wrapper header#masthead .responsive-site-primary-header-wrap .site-header-primary-section-right .search-type-responsive-slide.search-active .search-form .res-search-wrapper button.search-submit svg path {
       fill: black;
+    }
+
+    @media all and (width >= 1024px) {
+      #header-menu li a,
+      #header-menu li a span svg path {
+        color: <?php echo esc_html( $banner_text_color ); ?>;
+        stroke: <?php echo esc_html( $banner_text_color ); ?>;
+      }
     }
   </style>
 </head>
