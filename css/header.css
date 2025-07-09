@@ -78,7 +78,7 @@
 }
 #header-menu li.focus > ul.sub-menu {
   display: block;
-  position: absolute;
+  position: static;
   z-index: 9999;
   background-color: white;
   margin: 0;
@@ -208,7 +208,7 @@ ul#header-menu li a:hover {
     position: static;
     top: 3.4rem;
     width: 100%;
-    background: transparent;
+    background-color: transparent !important;
     visibility: visible;
     opacity: 1;
     transition: transform 0.3s ease-in-out;
