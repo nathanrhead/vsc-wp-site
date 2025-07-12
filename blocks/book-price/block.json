@@ -9,6 +9,7 @@
   "render": "file:./render.php",
   "usesContext": ["postId"],
   "supports": {
-    "html": false
+    "html": false,
+    "interactivity": true
   }
 }
