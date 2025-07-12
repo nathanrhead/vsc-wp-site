@@ -224,10 +224,25 @@ function updateNavMode() {
 updateNavMode();
 window.addEventListener('resize', updateNavMode);
 
-// Replace the about URL with the site's about page URL.
+ // Replace the about URL with the site's about page URL; used for the email icon in the footer, which doesn't understand relative URLs.
 document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('a[href="https://about"]').forEach(link => {
     link.href = window.location.origin + '/about/';
     link.removeAttribute('target');
+  });
+});
+
+// Stop the title of the first post of a other-title's list from being focused and, as a result, styled, when there's no featured image.
+document.addEventListener('DOMContentLoaded', () => {
+  const observer = new MutationObserver(() => {
+    const active = document.activeElement;
+    if (active && active.closest('.wp-block-post-template')) {
+      active.blur();
+    }  
+  });
+
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true,
   });
 });
