@@ -27,7 +27,7 @@ Responsive\responsive_entry_before();
 		
 		// Loop through elements.
 		foreach ( $elements as $element ) {
-			// Skip the default content element as it's handled above.
+			// Skip the default content element, because it's handled above.
 			if ( $element === 'content' ) {
 				// Intercept and display truncated content with expandable full version.
         $full_content = get_the_content();
@@ -41,7 +41,7 @@ Responsive\responsive_entry_before();
         echo '<div class="post-full-content" style="display: none;">' . apply_filters( 'the_content', $remainder ) . '</div>';
         echo '</div>';
 				
-				// Render other articles section here
+				// Render the other-articles section here. Only for blog posts.
 				get_template_part( 'partials/single/other-posts' );
 			} elseif ( 'featured_image' === $element && !post_password_required() ) { // Featured Image.
 				$format = $format ? $format : 'thumbnail';

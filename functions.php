@@ -567,6 +567,48 @@ function truncate_html( $html, $limit = 3000 ) {
   ];
 }
 
+// Register a custom query variable for paginated other-articles posts.
+function vsc_register_other_paged_query_var( $vars ) {
+  $vars[] = 'other_paged';
+  return $vars;
+}
+add_filter( 'query_vars', 'vsc_register_other_paged_query_var' );
+
+function vsc_enqueue_other_posts_ajax_script() {
+  wp_enqueue_script(
+    'vsc-other-posts-ajax',
+    get_stylesheet_directory_uri() . '/js/other-posts-ajax.js',
+    [ 'jquery' ],
+    null,
+    true
+  );
+
+  wp_localize_script( 'vsc-other-posts-ajax', 'vscOtherPosts', [
+    'ajax_url' => admin_url( 'admin-ajax.php' ),
+    'nonce'    => wp_create_nonce( 'vsc_other_posts_nonce' ),
+  ]);
+}
+add_action( 'wp_enqueue_scripts', 'vsc_enqueue_other_posts_ajax_script' );
+
+function vsc_handle_other_posts_ajax() {
+  check_ajax_referer( 'vsc_other_posts_nonce', 'nonce' );
+
+  $paged = isset($_POST['paged']) ? intval($_POST['paged']) : 1;  
+  $post_id = isset($_POST['post_id']) ? intval($_POST['post_id']) : 0;
+
+  if ( ! $post_id ) wp_send_json_error();
+
+  ob_start();
+  set_query_var( 'other_paged', $paged );
+  set_query_var( 'current_post_id', $post_id );
+  get_template_part( 'partials/single/other-posts' );
+  $html = ob_get_clean();
+
+  wp_send_json_success([ 'html' => $html ]);
+}
+add_action( 'wp_ajax_vsc_load_other_posts', 'vsc_handle_other_posts_ajax' );
+add_action( 'wp_ajax_nopriv_vsc_load_other_posts', 'vsc_handle_other_posts_ajax' );
+
 // // View all actions.
 // add_action('all', function ($hook_name = null) {
 //   static $seen = [];
