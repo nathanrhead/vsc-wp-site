@@ -28,6 +28,8 @@ function responsive_child_enqueue_styles() {
 
   wp_enqueue_style('child-homepage-style', get_stylesheet_directory_uri() . '/css/homepage.css', ['child-style'], filemtime(get_stylesheet_directory() . '/css/homepage.css'));
 
+  wp_enqueue_style('child-search-style', get_stylesheet_directory_uri() . '/css/search.css', ['child-style'], filemtime(get_stylesheet_directory() . '/css/search.css'));
+
 }
 add_action('wp_enqueue_scripts', 'responsive_child_enqueue_styles');
 
