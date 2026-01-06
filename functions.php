@@ -165,13 +165,14 @@ function register_podcast_post_type() {
 }
 add_action('init', 'register_podcast_post_type');
 
-// Handler for both [book_buy_url] and [ebook_buy_url] pseudo-shortcodes.
+// Handler for both [book_buy_url], [ebook_buy_url], and [spotify_url] pseudo-shortcodes.
 add_filter('render_block', function ($block_content, $block) {
-  if ( $block_content && ( strpos( $block_content, '[book_buy_url]' ) !== false || strpos( $block_content, '[ebook_buy_url]' ) !== false ) ) {
+  if ( $block_content && ( strpos( $block_content, '[book_buy_url]' ) !== false || strpos( $block_content, '[ebook_buy_url]' ) !== false || strpos( $block_content, '[spotify_url]' ) !== false ) ) {
     $post_id = get_the_ID();
 
     $book_url = esc_url(get_post_meta($post_id, 'book_buy_url', true));
     $ebook_url = esc_url(get_post_meta($post_id, 'ebook_buy_url', true));
+    $spotify_url = esc_url(get_post_meta($post_id, 'spotify_url', true));
 
     if ($book_url) {
       $block_content = str_replace('href="http://[book_buy_url]"', 'href="' . $book_url . '"', $block_content);
@@ -192,6 +193,18 @@ add_filter('render_block', function ($block_content, $block) {
       // Remove the entire .wp-block-button div containing the [ebook_buy_url] anchor if no URL is present.
       $block_content = preg_replace(
         '/<div class="wp-block-button[^>]*>\s*<a[^>]+href="[^"]*\[ebook_buy_url\][^"]*"[^>]*>.*?<\/a>\s*<\/div>/is',
+        '',
+        $block_content
+      );
+    }
+
+    if ($spotify_url) {
+      $block_content = str_replace('href="http://[spotify_url]"', 'href="' . $spotify_url . '"', $block_content);
+      $block_content = str_replace('href="[spotify_url]"', 'href="' . $spotify_url . '"', $block_content);
+    } else {
+      // Remove the entire .wp-block-button div containing the [spotify_url] anchor if no URL is present.
+      $block_content = preg_replace(
+        '/<div class="wp-block-button[^>]*>\s*<a[^>]+href="[^"]*\[spotify_url\][^"]*"[^>]*>.*?<\/a>\s*<\/div>/is',
         '',
         $block_content
       );
@@ -633,3 +646,13 @@ add_action( 'wp_ajax_nopriv_vsc_load_other_posts', 'vsc_handle_other_posts_ajax'
 //     error_log('Responsive Post Carousel block not found.');
 //   }
 // });
+
+// Log the SQL query and query vars for Query Loop blocks.
+add_filter( 'query_loop_block_query_vars', function( $vars, $block ) {
+    file_put_contents(
+        WP_CONTENT_DIR . '/debug.txt',
+        print_r( $vars, true ) . "\n\n",
+        FILE_APPEND
+    );
+    return $vars;
+}, 10, 2 );

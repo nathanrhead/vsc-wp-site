@@ -35,7 +35,7 @@ article.book.type-book .wp-block-columns > .wp-block-column:first-child {
   height: auto;
   min-height: 100%;
 }
-.book-detail_featured-image figure {
+figure.book-detail_featured-image {
   flex: 1;
   display: flex;
   align-items: stretch;

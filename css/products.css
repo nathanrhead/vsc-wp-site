@@ -344,5 +344,6 @@ figure.wp-block-post-featured-image a {
   /* Add the description from the featured product's second column on the books page. */
   .page-template-books .page_featured-list .wp-block-column:nth-of-type(2) li .wp-block-post-excerpt {
     display: flex;
+    flex-direction: column;
   }
 }
